@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
-using Vector3 = System.Numerics.Vector3;
 
 namespace ChristmasLearningProject.Tests.Runtime
 {
@@ -28,16 +27,22 @@ namespace ChristmasLearningProject.Tests.Runtime
         }
         
         [UnityTest]
-        public IEnumerator DeployCristalBoat_ByDefiningItsRoute()
+        public IEnumerator DeployCristalBoat_InDeparturePoint()
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
 
-            var departurePoint = Vector2.one;
-            yield return ClickInWorld(departurePoint);
-            var destinationPoint = Vector2.zero;
-            yield return ClickInWorld(destinationPoint);
+            yield return ClickInWorld(Vector2.one);
+            var departurePoint = Input.mousePosition;
+            yield return ClickInWorld(Vector2.zero);
 
-            Assert.IsNotNull(Object.FindObjectOfType<CristalBoat>());
+            Assert.AreEqual(InWorld(departurePoint), Object.FindObjectOfType<CristalBoat>().transform.position);
+        }
+
+        static Vector3 InWorld(Vector2 screenPosition)
+        {
+            var toWorldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+            toWorldPosition.z = 0;
+            return toWorldPosition;
         }
     }
 }

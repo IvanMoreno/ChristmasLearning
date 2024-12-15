@@ -25,7 +25,7 @@ namespace ChristmasLearningProject.Runtime.View
             }
             else
             {
-                Instantiate(prefab);
+                Instantiate(prefab, departure, Quaternion.identity);
             }
         }
     }
