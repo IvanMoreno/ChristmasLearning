@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
+using static UnityEngine.Object;
 
 namespace ChristmasLearningProject.Tests.Runtime
 {
@@ -15,7 +16,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
 
-            Assert.IsNull(Object.FindObjectOfType<WinScreen>());
+            Assert.IsNull(FindObjectOfType<WinScreen>());
         }
 
         [UnityTest]
@@ -23,7 +24,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
 
-            Assert.IsNull(Object.FindObjectOfType<CristalBoat>());
+            Assert.IsNull(FindObjectOfType<CristalBoat>());
         }
 
         [UnityTest]
@@ -31,11 +32,11 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
 
-            yield return ClickInWorld(Vector2.one);
+            yield return SetDepartureIn(Vector2.one);
             var departurePoint = Input.mousePosition;
-            yield return ClickInWorld(Vector2.zero);
+            yield return SetDestinationIn(Vector2.zero);
 
-            Assert.AreEqual(InWorld(departurePoint), Object.FindObjectOfType<CristalBoat>().transform.position);
+            Assert.AreEqual(InWorld(departurePoint), CristalBoat.position);
         }
 
         [UnityTest]
@@ -43,15 +44,27 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
 
-            yield return ClickInWorld(Vector2.one);
-            yield return ClickInWorld(Vector2.zero);
+            yield return SetDepartureIn(Vector2.one);
+            yield return SetDestinationIn(Vector2.zero);
             var destination = Input.mousePosition;
 
-            yield return new WaitUntil(() =>
-                Object.FindObjectOfType<CristalBoat>().transform.position.Equals(InWorld(destination)));
+            yield return new WaitUntil(() => CristalBoat.position.Equals(InWorld(destination)));
 
-            Assert.AreEqual(InWorld(destination), Object.FindObjectOfType<CristalBoat>().transform.position);
+            Assert.AreEqual(InWorld(destination), CristalBoat.position);
         }
+
+        static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
+
+        static IEnumerator SetDepartureIn(Vector2 point)
+        {
+            yield return ClickInWorld(point);
+        }
+
+        static IEnumerator SetDestinationIn(Vector2 point)
+        {
+            yield return ClickInWorld(point);
+        }
+
 
         static Vector3 InWorld(Vector2 screenPosition)
         {
