@@ -25,7 +25,9 @@ namespace ChristmasLearningProject.Runtime.View
             }
             else
             {
-                Instantiate(prefab, departure, Quaternion.identity);
+                var destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var boat = Instantiate(prefab, departure, Quaternion.identity);
+                boat.SendTo(destination);
             }
         }
     }

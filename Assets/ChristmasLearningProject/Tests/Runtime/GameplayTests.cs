@@ -25,7 +25,7 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             Assert.IsNull(Object.FindObjectOfType<CristalBoat>());
         }
-        
+
         [UnityTest]
         public IEnumerator DeployCristalBoat_InDeparturePoint()
         {
@@ -36,6 +36,21 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return ClickInWorld(Vector2.zero);
 
             Assert.AreEqual(InWorld(departurePoint), Object.FindObjectOfType<CristalBoat>().transform.position);
+        }
+
+        [UnityTest]
+        public IEnumerator MoveCristalBoat_TowardsItsDestination()
+        {
+            yield return SceneManager.LoadSceneAsync("Level_0");
+
+            yield return ClickInWorld(Vector2.one);
+            yield return ClickInWorld(Vector2.zero);
+            var destination = Input.mousePosition;
+
+            yield return new WaitUntil(() =>
+                Object.FindObjectOfType<CristalBoat>().transform.position.Equals(InWorld(destination)));
+
+            Assert.AreEqual(InWorld(destination), Object.FindObjectOfType<CristalBoat>().transform.position);
         }
 
         static Vector3 InWorld(Vector2 screenPosition)
