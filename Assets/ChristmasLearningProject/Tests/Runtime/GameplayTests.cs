@@ -44,16 +44,33 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
 
-            yield return SetDepartureIn(Vector2.one);
+            yield return SetDepartureIn(Vector2.one * 5);
             yield return SetDestinationIn(Vector2.zero);
             var destination = Input.mousePosition;
 
-            yield return new WaitUntil(() => CristalBoat.position.Equals(InWorld(destination)));
+            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
 
-            Assert.AreEqual(InWorld(destination), CristalBoat.position);
+            Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(destination)));
+        }
+
+        [UnityTest]
+        public IEnumerator Win_ByDockingCristal_InHarbour()
+        {
+            yield return SceneManager.LoadSceneAsync("Level_0");
+
+            yield return SetDepartureIn(Vector2.one * 5);
+            var harbourPosition = FindObjectOfType<Harbour>().transform.position;
+            yield return SetDestinationIn(harbourPosition);
+
+            yield return new WaitUntil(() => FindObjectOfType<WinScreen>() != null);
+
+            Assert.IsNotNull(FindObjectOfType<WinScreen>());
         }
 
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
+
+        static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f) 
+            => Vector2.Distance(theFirst.position, destination) < distance;
 
         static IEnumerator SetDepartureIn(Vector2 point)
         {

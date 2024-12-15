@@ -3,7 +3,9 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
+// A mix of:
 // https://stackoverflow.com/questions/2416748/how-do-you-simulate-mouse-click-in-c
+// https://discussions.unity.com/t/move-set-mouse-cursor-position/746496/10
 namespace ChristmasLearningProject.Tests.Runtime
 {
     public static class MouseOperations
@@ -21,10 +23,6 @@ namespace ChristmasLearningProject.Tests.Runtime
             RightUp = 0x00000010
         }
 
-        [DllImport("user32.dll", EntryPoint = "SetCursorPos")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool SetCursorPos(int x, int y);      
-
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetCursorPos(out MousePoint lpMousePoint);
@@ -34,25 +32,19 @@ namespace ChristmasLearningProject.Tests.Runtime
 
         public static IEnumerator ClickInWorld(Vector2 worldPoint)
         {
-            var screenPoint = Camera.main.WorldToScreenPoint(worldPoint);
-            ClickAt(screenPoint);
+            ClickAt(Camera.main.WorldToScreenPoint(worldPoint));
             yield return null;
         }
-        
+
         public static void ClickAt(Vector2 point)
         {
-            SetCursorPosition(new MousePoint((int)point.x, (int)point.y));
+            SetCursorPosition(point);
             MouseEvent(MouseEventFlags.LeftUp | MouseEventFlags.LeftDown);
         }
 
-        public static void SetCursorPosition(MousePoint point)
+        public static void SetCursorPosition(Vector2 point)
         {
-            SetCursorPos(point.X, point.Y);
-        }
-
-        public static void SetCursorPosition(int x, int y) 
-        {
-            SetCursorPos(x, y);
+            UnityEngine.InputSystem.Mouse.current.WarpCursorPosition(point);
         }
 
         public static MousePoint GetCursorPosition()
