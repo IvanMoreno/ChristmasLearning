@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -31,6 +32,13 @@ namespace ChristmasLearningProject.Tests.Runtime
         [DllImport("user32.dll")]
         private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
+        public static IEnumerator ClickInWorld(Vector2 worldPoint)
+        {
+            var screenPoint = Camera.main.WorldToScreenPoint(worldPoint);
+            ClickAt(screenPoint);
+            yield return null;
+        }
+        
         public static void ClickAt(Vector2 point)
         {
             SetCursorPosition(new MousePoint((int)point.x, (int)point.y));

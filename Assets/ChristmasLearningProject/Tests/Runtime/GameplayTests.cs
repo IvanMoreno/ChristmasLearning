@@ -33,11 +33,9 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return SceneManager.LoadSceneAsync("Level_0");
 
             var departurePoint = Vector2.one;
-            ClickAt(Camera.main.WorldToScreenPoint(departurePoint));
-            yield return null;
+            yield return ClickInWorld(departurePoint);
             var destinationPoint = Vector2.zero;
-            ClickAt(Camera.main.WorldToScreenPoint(destinationPoint));
-            yield return null;
+            yield return ClickInWorld(destinationPoint);
 
             Assert.IsNotNull(Object.FindObjectOfType<CristalBoat>());
         }
