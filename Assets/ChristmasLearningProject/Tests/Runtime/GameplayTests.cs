@@ -11,27 +11,27 @@ namespace ChristmasLearningProject.Tests.Runtime
 {
     public class GameplayTests
     {
-        [UnityTest]
-        public IEnumerator Hide_WinScreen_OnStart()
+        [UnitySetUp]
+        public IEnumerator SetUp()
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
-
+        }
+        
+        [Test]
+        public void Hide_WinScreen_OnStart()
+        {
             Assert.IsNull(FindObjectOfType<WinScreen>());
         }
 
-        [UnityTest]
-        public IEnumerator CristalBoat_IsNotDeployed_OnStart()
+        [Test]
+        public void CristalBoat_IsNotDeployed_OnStart()
         {
-            yield return SceneManager.LoadSceneAsync("Level_0");
-
             Assert.IsNull(FindObjectOfType<CristalBoat>());
         }
 
         [UnityTest]
         public IEnumerator DeployCristalBoat_InDeparturePoint()
         {
-            yield return SceneManager.LoadSceneAsync("Level_0");
-
             yield return SetDepartureIn(Vector2.one);
             var departurePoint = Input.mousePosition;
             yield return SetDestinationIn(Vector2.zero);
@@ -42,8 +42,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator MoveCristalBoat_TowardsItsDestination()
         {
-            yield return SceneManager.LoadSceneAsync("Level_0");
-
             yield return SetDepartureIn(Vector2.one * 5);
             yield return SetDestinationIn(Vector2.zero);
             var destination = Input.mousePosition;
@@ -56,8 +54,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator Win_ByDockingCristal_InHarbour()
         {
-            yield return SceneManager.LoadSceneAsync("Level_0");
-
             yield return SetDepartureIn(Vector2.one * 5);
             var harbourPosition = FindObjectOfType<Harbour>().transform.position;
             yield return SetDestinationIn(harbourPosition);
@@ -70,8 +66,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator CristalBoat_CanOnlyBeDeployed_Once()
         {
-            yield return SceneManager.LoadSceneAsync("Level_0");
-
             yield return SetDepartureIn(Vector2.one * 2);
             yield return SetDestinationIn(Vector2.one);
             yield return SetDepartureIn(Vector2.one * 2);
