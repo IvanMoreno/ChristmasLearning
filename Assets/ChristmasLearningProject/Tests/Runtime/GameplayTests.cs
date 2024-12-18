@@ -67,6 +67,19 @@ namespace ChristmasLearningProject.Tests.Runtime
             Assert.IsNotNull(FindObjectOfType<WinScreen>());
         }
 
+        [UnityTest]
+        public IEnumerator CristalBoat_CanOnlyBeDeployed_Once()
+        {
+            yield return SceneManager.LoadSceneAsync("Level_0");
+
+            yield return SetDepartureIn(Vector2.one * 2);
+            yield return SetDestinationIn(Vector2.one);
+            yield return SetDepartureIn(Vector2.one * 2);
+            yield return SetDestinationIn(Vector2.one);
+            
+            Assert.AreEqual(1, FindObjectsOfType<CristalBoat>().Length);
+        }
+
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
 
         static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f) 

@@ -23,7 +23,7 @@ namespace ChristmasLearningProject.Runtime.View
                 departure = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 definedDeparture = true;
             }
-            else
+            else if(FindObjectOfType<CristalBoat>() == null)
             {
                 var destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 var boat = Instantiate(prefab, departure, Quaternion.identity);
