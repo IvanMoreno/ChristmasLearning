@@ -16,6 +16,7 @@ namespace ChristmasLearningProject.Runtime.View
 
         void ProcessInput()
         {
+            if (PointerSelection.IsOverUI()) return;
             if (!Input.GetMouseButtonUp(0)) return;
             
             if (!definedDeparture)
