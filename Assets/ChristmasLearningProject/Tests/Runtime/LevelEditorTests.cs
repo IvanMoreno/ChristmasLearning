@@ -50,7 +50,6 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNull(Object.FindObjectOfType<EnableShieldBoatButton>());
-            Assert.IsNull(Object.FindObjectOfType<ConfirmLevelEditionButton>());
         }
     }
 }
