@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ChristmasLearningProject.Runtime.View
 {
@@ -11,6 +10,8 @@ namespace ChristmasLearningProject.Runtime.View
         Vector2 departure;
         bool definedDeparture;
         bool deployCristalBoat = true;
+        int cristalBoatsInStock = 1;
+        int shieldBoatsInStock = 1;
 
         void Update()
         {
@@ -27,19 +28,32 @@ namespace ChristmasLearningProject.Runtime.View
                 departure = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 definedDeparture = true;
             }
-            else if(FindObjectOfType<CristalBoat>() == null)
+            else if(HasBoatInStock())
             {
                 var destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (deployCristalBoat)
                 {
                     var boat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
-                    boat.SendTo(destination);    
+                    boat.SendTo(destination);
+                    cristalBoatsInStock--;
                 }
                 else
                 {
                     Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
+                    shieldBoatsInStock--;
                 }
             }
+        }
+
+        bool HasBoatInStock()
+        {
+            if (deployCristalBoat && cristalBoatsInStock > 0)
+                return true;
+
+            if (!deployCristalBoat && shieldBoatsInStock > 0)
+                return true;
+
+            return false;
         }
 
         public void DeployShieldBoat()

@@ -91,6 +91,20 @@ namespace ChristmasLearningProject.Tests.Runtime
             Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
         }
 
+        [UnityTest]
+        public IEnumerator CanDeployTwoBoats()
+        {
+            yield return SetDepartureIn(Vector2.one * 2);
+            yield return SetDestinationIn(Vector2.one);
+            
+            yield return ClickOn<ShieldBoatSelectionButton>();
+            yield return SetDepartureIn(Vector2.down);
+            yield return SetDestinationIn(Vector2.one);
+
+            Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
+            Assert.IsNotNull(FindObjectOfType<CristalBoat>());
+        }
+
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
 
         static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f) 
