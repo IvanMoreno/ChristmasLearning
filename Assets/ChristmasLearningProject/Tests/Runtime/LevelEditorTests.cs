@@ -17,5 +17,16 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             Assert.IsNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
         }
+
+        [UnityTest]
+        public IEnumerator EnableShieldBoatSelection_DuringLevelEdition()
+        {
+            yield return SceneManager.LoadSceneAsync("LevelEditor");
+
+            yield return Do.ClickOn<ShieldBoatEditionButton>();
+            yield return Do.ClickOn<ConfirmLevelEditionButton>();
+            
+            Assert.IsNotNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
+        }
     }
 }
