@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
 using static UnityEngine.Object;
 
@@ -15,6 +16,8 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator SetUp()
         {
             yield return SceneManager.LoadSceneAsync("Level_0");
+            ClickAt(FindObjectOfType<ConfirmLevelEditionButton>().transform.position);
+            yield return null;
         }
         
         [Test]
