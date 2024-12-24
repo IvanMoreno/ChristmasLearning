@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
 
 namespace ChristmasLearningProject.Tests.Runtime
 {
@@ -27,6 +28,17 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return Do.ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNotNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
+        }
+
+        [UnityTest]
+        public IEnumerator DeploymentIsNotPossible_DuringLevelEdition()
+        {
+            yield return SceneManager.LoadSceneAsync("LevelEditor");
+
+            yield return ClickInWorld(Vector2.down);
+            yield return ClickInWorld(Vector2.one);
+            
+            Assert.IsNull(Object.FindObjectOfType<CristalBoat>());
         }
     }
 }
