@@ -41,5 +41,16 @@ namespace ChristmasLearningProject.Tests.Runtime
             
             Assert.IsNull(Object.FindObjectOfType<CristalBoat>());
         }
+
+        [UnityTest]
+        public IEnumerator HideLevelEditorButtons_DuringPlaymode()
+        {
+            yield return SceneManager.LoadSceneAsync("LevelEditor");
+            
+            yield return ClickOn<ConfirmLevelEditionButton>();
+            
+            Assert.IsNull(Object.FindObjectOfType<ShieldBoatEditionButton>());
+            Assert.IsNull(Object.FindObjectOfType<ConfirmLevelEditionButton>());
+        }
     }
 }
