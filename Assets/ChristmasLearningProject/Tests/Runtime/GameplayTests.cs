@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using static ChristmasLearningProject.Tests.Runtime.Do;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
 using static UnityEngine.Object;
 
@@ -17,8 +18,8 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator SetUp()
         {
             yield return SceneManager.LoadSceneAsync("LevelEditor");
-            yield return Do.ClickOn<EnableShieldBoatButton>();
-            yield return Do.ClickOn<ConfirmLevelEditionButton>();
+            yield return ClickOn<EnableShieldBoatButton>();
+            yield return ClickOn<ConfirmLevelEditionButton>();
         }
         
         [Test]
@@ -76,6 +77,18 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return SetDestinationIn(Vector2.one);
             
             Assert.AreEqual(1, FindObjectsOfType<CristalBoat>().Length);
+        }
+
+        [UnityTest]
+        public IEnumerator Deploy_ShieldBoat()
+        {
+            yield return ClickOn<ShieldBoatSelectionButton>();
+
+            yield return SetDepartureIn(Vector2.one * 2);
+            yield return SetDestinationIn(Vector2.one);
+            
+            Assert.IsNull(FindObjectOfType<CristalBoat>());
+            Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
         }
 
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;

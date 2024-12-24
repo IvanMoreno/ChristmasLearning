@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ChristmasLearningProject.Runtime.View
 {
     public class CaptainFinger : MonoBehaviour
     {
-        [SerializeField] CristalBoat prefab;
+        [SerializeField] CristalBoat cristalBoatPrefab;
+        [SerializeField] ShieldBoat shieldBoatPrefab;
         
         Vector2 departure;
         bool definedDeparture;
+        bool deployCristalBoat = true;
 
         void Update()
         {
@@ -16,8 +19,8 @@ namespace ChristmasLearningProject.Runtime.View
 
         void ProcessInput()
         {
-            if (PointerSelection.IsOverUI()) return;
             if (!Input.GetMouseButtonUp(0)) return;
+            if (PointerSelection.IsOverUI()) return;
             
             if (!definedDeparture)
             {
@@ -27,9 +30,21 @@ namespace ChristmasLearningProject.Runtime.View
             else if(FindObjectOfType<CristalBoat>() == null)
             {
                 var destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var boat = Instantiate(prefab, departure, Quaternion.identity);
-                boat.SendTo(destination);
+                if (deployCristalBoat)
+                {
+                    var boat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
+                    boat.SendTo(destination);    
+                }
+                else
+                {
+                    Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
+                }
             }
+        }
+
+        public void DeployShieldBoat()
+        {
+            deployCristalBoat = false;
         }
     }
 }
