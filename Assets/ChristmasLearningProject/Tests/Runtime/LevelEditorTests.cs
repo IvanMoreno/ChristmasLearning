@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using static ChristmasLearningProject.Tests.Runtime.Do;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
 
 namespace ChristmasLearningProject.Tests.Runtime
@@ -14,7 +15,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator ShieldBoat_IsNotAvailable_ByDefault()
         {
             yield return SceneManager.LoadSceneAsync("LevelEditor");
-            yield return Do.ClickOn<ConfirmLevelEditionButton>();
+            yield return ClickOn<ConfirmLevelEditionButton>();
 
             Assert.IsNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
         }
@@ -24,8 +25,8 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("LevelEditor");
 
-            yield return Do.ClickOn<ShieldBoatEditionButton>();
-            yield return Do.ClickOn<ConfirmLevelEditionButton>();
+            yield return ClickOn<ShieldBoatEditionButton>();
+            yield return ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNotNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
         }
