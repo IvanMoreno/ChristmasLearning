@@ -17,7 +17,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator SetUp()
         {
             yield return SceneManager.LoadSceneAsync("LevelEditor");
-            yield return Do.ClickOn<ShieldBoatEditionButton>();
+            yield return Do.ClickOn<EnableShieldBoatButton>();
             yield return Do.ClickOn<ConfirmLevelEditionButton>();
         }
         

@@ -25,7 +25,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return SceneManager.LoadSceneAsync("LevelEditor");
 
-            yield return ClickOn<ShieldBoatEditionButton>();
+            yield return ClickOn<EnableShieldBoatButton>();
             yield return ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNotNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
@@ -49,7 +49,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             
             yield return ClickOn<ConfirmLevelEditionButton>();
             
-            Assert.IsNull(Object.FindObjectOfType<ShieldBoatEditionButton>());
+            Assert.IsNull(Object.FindObjectOfType<EnableShieldBoatButton>());
             Assert.IsNull(Object.FindObjectOfType<ConfirmLevelEditionButton>());
         }
     }
