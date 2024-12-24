@@ -13,8 +13,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator ShieldBoat_IsNotAvailable_ByDefault()
         {
             yield return SceneManager.LoadSceneAsync("LevelEditor");
-            MouseOperations.ClickAt(Object.FindObjectOfType<ConfirmLevelEditionButton>().transform.position);
-            yield return null;
+            yield return Do.ClickOn<ConfirmLevelEditionButton>();
 
             Assert.IsNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
         }
