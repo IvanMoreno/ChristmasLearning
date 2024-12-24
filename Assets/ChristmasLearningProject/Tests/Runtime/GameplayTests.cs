@@ -15,7 +15,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnitySetUp]
         public IEnumerator SetUp()
         {
-            yield return SceneManager.LoadSceneAsync("Level_0");
+            yield return SceneManager.LoadSceneAsync("LevelEditor");
             ClickAt(FindObjectOfType<ConfirmLevelEditionButton>().transform.position);
             yield return null;
         }
