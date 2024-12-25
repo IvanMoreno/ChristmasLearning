@@ -14,6 +14,7 @@ namespace ChristmasLearningProject.Runtime.View
             if (FindObjectOfType<CristalBoat>() == null) return;
             
             FindObjectOfType<CristalBoat>().gameObject.SetActive(false);
+            FindObjectOfType<GameOverScreen>(true).gameObject.SetActive(true);
         }
     }
 }

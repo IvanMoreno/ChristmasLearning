@@ -25,7 +25,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         }
 
         [UnityTest]
-        public IEnumerator TurretKills_CristalBoat()
+        public IEnumerator WhenTurretKills_CristalBoat_GameOver()
         {
             yield return PlaceTurretAt(Vector2.one);
             yield return ClickOn<ConfirmLevelEditionButton>();
@@ -33,7 +33,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return DeployCristalBoat(Vector2.one * 2, Vector2.one);
             yield return new WaitUntil(() => FindObjectOfType<CristalBoat>() == null);
             
-            Assert.IsNull(FindObjectOfType<CristalBoat>());
+            Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
         }
 
         static IEnumerator DeployCristalBoat(Vector2 departure, Vector2 destination)
