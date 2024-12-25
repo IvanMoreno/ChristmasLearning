@@ -42,6 +42,8 @@ namespace ChristmasLearningProject.Runtime.View
                     Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
                     shieldBoatsInStock--;
                 }
+                
+                definedDeparture = false;
             }
         }
 
