@@ -38,6 +38,8 @@ namespace ChristmasLearningProject.Tests.Runtime
 
         static IEnumerator DeployCristalBoat(Vector2 departure, Vector2 destination)
         {
+            Assert.IsNull(FindObjectOfType<LevelEditor>());
+
             yield return ClickInWorld(departure);
             yield return ClickInWorld(destination);
         }
