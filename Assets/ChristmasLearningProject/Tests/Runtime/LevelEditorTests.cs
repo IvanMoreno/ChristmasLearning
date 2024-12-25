@@ -63,7 +63,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator PlaceTurret()
         {
-            yield return ClickOn<PlaceTurretButton>();
             yield return ClickInWorld(Vector2.zero);
             
             Assert.IsNotNull(Object.FindObjectOfType<Turret>());
