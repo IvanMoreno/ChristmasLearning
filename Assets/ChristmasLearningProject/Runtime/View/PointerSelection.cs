@@ -7,17 +7,22 @@ namespace ChristmasLearningProject.Runtime.View
 {
     public static class PointerSelection
     {
-        public static bool IsOverUI()
+        public static bool IsOverAnyUI()
         {
-            return IsOverUI(GetEventSystemRaycastResults());
+            return IsOverUI(GetEventSystemRaycastResults(), string.Empty);
         }
 
-        static bool IsOverUI(List<RaycastResult> eventSystemRaysastResults)
+        public static bool IsOver(string specificLayer)
+        {
+            return IsOverUI(GetEventSystemRaycastResults(), specificLayer);
+        }
+
+        static bool IsOverUI(List<RaycastResult> eventSystemRaysastResults, string layer)
         {
             for (int index = 0; index < eventSystemRaysastResults.Count; index++)
             {
                 RaycastResult curRaysastResult = eventSystemRaysastResults[index];
-                if (curRaysastResult.gameObject.layer == LayerMask.NameToLayer("UI"))
+                if (string.IsNullOrEmpty(layer) || curRaysastResult.gameObject.layer == LayerMask.NameToLayer(layer))
                     return true;
             }
 

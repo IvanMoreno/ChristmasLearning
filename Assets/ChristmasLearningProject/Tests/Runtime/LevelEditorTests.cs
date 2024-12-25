@@ -60,6 +60,15 @@ namespace ChristmasLearningProject.Tests.Runtime
             Assert.IsNull(Object.FindObjectOfType<Turret>());
         }
 
+        [UnityTest]
+        public IEnumerator PlaceTurret()
+        {
+            yield return ClickOn<PlaceTurretButton>();
+            yield return ClickInWorld(Vector2.zero);
+            
+            Assert.IsNotNull(Object.FindObjectOfType<Turret>());
+        }
+
         static IEnumerator StartGame() => ClickOn<ConfirmLevelEditionButton>();
     }
 }
