@@ -41,6 +41,17 @@ namespace ChristmasLearningProject.Tests.Runtime
             Assert.IsNull(FindObjectOfType<GameOverScreen>());
         }
 
+        [UnityTest]
+        public IEnumerator TurretShoots_NearestBoat()
+        {
+            yield return FromLevelEditor().WithShieldBoatEnabled().WithTurretAt(Vector2.one).Build();
+
+            yield return DeployShieldBoat(Vector2.one * 5, Vector2.one * 2);
+            yield return DeployCristalBoat(Vector2.one * 2, Vector2.one);
+
+            Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
+        }
+
         static IEnumerator DeployCristalBoat(Vector2 departure, Vector2 destination)
         {
             Assert.IsNull(FindObjectOfType<LevelEditor>());
