@@ -21,7 +21,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator ShieldBoat_IsNotAvailable_ByDefault()
         {
-            yield return ClickOn<ConfirmLevelEditionButton>();
+            yield return StartGame();
 
             Assert.IsNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
         }
@@ -30,7 +30,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator EnableShieldBoatSelection_DuringLevelEdition()
         {
             yield return ClickOn<EnableShieldBoatButton>();
-            yield return ClickOn<ConfirmLevelEditionButton>();
+            yield return StartGame();
             
             Assert.IsNotNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
         }
@@ -47,7 +47,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator HideLevelEditorButtons_DuringPlaymode()
         {
-            yield return ClickOn<ConfirmLevelEditionButton>();
+            yield return StartGame();
             
             Assert.IsNull(Object.FindObjectOfType<EnableShieldBoatButton>());
         }
@@ -55,9 +55,11 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator ThereIs_NoTurret_ByDefault()
         {
-            yield return ClickOn<ConfirmLevelEditionButton>();
+            yield return StartGame();
             
             Assert.IsNull(Object.FindObjectOfType<Turret>());
         }
+
+        static IEnumerator StartGame() => ClickOn<ConfirmLevelEditionButton>();
     }
 }
