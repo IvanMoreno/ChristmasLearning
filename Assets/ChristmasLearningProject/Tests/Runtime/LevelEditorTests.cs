@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
 using UnityEngine;
@@ -50,6 +51,16 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNull(Object.FindObjectOfType<EnableShieldBoatButton>());
+        }
+
+        [UnityTest]
+        public IEnumerator ThereIs_NoTurret_ByDefault()
+        {
+            yield return SceneManager.LoadSceneAsync("LevelEditor");
+
+            yield return ClickOn<ConfirmLevelEditionButton>();
+            
+            Assert.IsNull(Object.FindObjectOfType<Turret>());
         }
     }
 }
