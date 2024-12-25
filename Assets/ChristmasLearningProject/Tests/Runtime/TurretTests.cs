@@ -31,7 +31,6 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return ClickOn<ConfirmLevelEditionButton>();
 
             yield return DeployCristalBoat(Vector2.one * 2, Vector2.one);
-            yield return new WaitUntil(() => FindObjectOfType<CristalBoat>() == null);
             
             Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
         }
