@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 using static ChristmasLearningProject.Tests.Runtime.Do;
+using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
 using static UnityEngine.Object;
 
@@ -17,9 +16,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnitySetUp]
         public IEnumerator SetUp()
         {
-            yield return SceneManager.LoadSceneAsync("LevelEditor");
-            yield return ClickOn<EnableShieldBoatButton>();
-            yield return ClickOn<ConfirmLevelEditionButton>();
+            yield return FromLevelEditor().WithShieldBoatEnabled().Build();
         }
         
         [Test]

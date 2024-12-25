@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
 using UnityEngine;
