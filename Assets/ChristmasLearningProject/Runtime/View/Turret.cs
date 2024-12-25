@@ -11,6 +11,7 @@ namespace ChristmasLearningProject.Runtime.View
 
         static void ShootToEnemy()
         {
+            if (FindObjectOfType<ShieldBoat>() != null) return;
             if (FindObjectOfType<CristalBoat>() == null) return;
             
             FindObjectOfType<CristalBoat>().gameObject.SetActive(false);

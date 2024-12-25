@@ -60,5 +60,10 @@ namespace ChristmasLearningProject.Runtime.View
         {
             deployCristalBoat = false;
         }
+
+        public void DeployCristalBoat()
+        {
+            deployCristalBoat = true;
+        }
     }
 }
