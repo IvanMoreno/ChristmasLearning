@@ -12,10 +12,15 @@ namespace ChristmasLearningProject.Tests.Runtime
 {
     public class LevelEditorTests
     {
+        [UnitySetUp]
+        public IEnumerator SetUp()
+        {
+            yield return SceneManager.LoadSceneAsync("LevelEditor");
+        }
+        
         [UnityTest]
         public IEnumerator ShieldBoat_IsNotAvailable_ByDefault()
         {
-            yield return SceneManager.LoadSceneAsync("LevelEditor");
             yield return ClickOn<ConfirmLevelEditionButton>();
 
             Assert.IsNull(Object.FindObjectOfType<ShieldBoatSelectionButton>());
@@ -24,8 +29,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator EnableShieldBoatSelection_DuringLevelEdition()
         {
-            yield return SceneManager.LoadSceneAsync("LevelEditor");
-
             yield return ClickOn<EnableShieldBoatButton>();
             yield return ClickOn<ConfirmLevelEditionButton>();
             
@@ -35,8 +38,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator DeploymentIsNotPossible_DuringLevelEdition()
         {
-            yield return SceneManager.LoadSceneAsync("LevelEditor");
-
             yield return ClickInWorld(Vector2.down);
             yield return ClickInWorld(Vector2.one);
             
@@ -46,8 +47,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator HideLevelEditorButtons_DuringPlaymode()
         {
-            yield return SceneManager.LoadSceneAsync("LevelEditor");
-            
             yield return ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNull(Object.FindObjectOfType<EnableShieldBoatButton>());
@@ -56,8 +55,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator ThereIs_NoTurret_ByDefault()
         {
-            yield return SceneManager.LoadSceneAsync("LevelEditor");
-
             yield return ClickOn<ConfirmLevelEditionButton>();
             
             Assert.IsNull(Object.FindObjectOfType<Turret>());
