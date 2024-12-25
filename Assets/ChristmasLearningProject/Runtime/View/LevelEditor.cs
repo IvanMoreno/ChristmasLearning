@@ -17,6 +17,7 @@ namespace ChristmasLearningProject.Runtime.View
             if (PointerSelection.IsOver("LevelEditorButtons")) return;
             
             var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            position.z = 0;
             Instantiate(turretPrefab, position, Quaternion.identity);
         }
     }
