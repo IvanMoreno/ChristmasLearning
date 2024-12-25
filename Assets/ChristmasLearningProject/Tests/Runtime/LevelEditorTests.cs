@@ -67,6 +67,16 @@ namespace ChristmasLearningProject.Tests.Runtime
             
             Assert.IsNotNull(Object.FindObjectOfType<Turret>());
         }
+        
+        [UnityTest]
+        public IEnumerator TurretPlacement_IsDisabled_InPlaymode()
+        {
+            yield return StartGame();
+
+            yield return ClickInWorld(Vector2.zero);
+            
+            Assert.IsNull(Object.FindObjectOfType<Turret>());
+        }
 
         static IEnumerator StartGame() => ClickOn<ConfirmLevelEditionButton>();
     }
