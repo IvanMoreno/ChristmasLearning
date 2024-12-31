@@ -57,4 +57,15 @@ public class BoatTests
         
         Assert.AreEqual(firstStepDistance - Vector2.zero, secondStepDistance - firstStepDistance);
     }
+
+    [Test]
+    public void RewindMovement()
+    {
+        sut.SetRoute(Vector2.zero, Vector2.one);
+        
+        sut.Move(0.01f);
+        sut.Rewind(0.01f);
+        
+        Assert.AreEqual(Vector2.zero, sut.Position);
+    }
 }

@@ -39,5 +39,10 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public static Boat Cristal() => new();
         public static Boat Shield() => new();
+
+        public void Rewind(float deltaTime)
+        {
+            Move(-deltaTime);
+        }
     }
 }
