@@ -1,7 +1,9 @@
 {
     "name": "ChristmasLearningProject.Runtime.Application",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:5b9eb281b78aa4144a8c8440b0000b10"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
