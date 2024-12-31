@@ -8,7 +8,12 @@ namespace ChristmasLearningProject.Runtime.View
         void Start()
         {
             Time.timeScale = 1;
-            GetComponent<Button>().onClick.AddListener(() => Time.timeScale = 0);
+            GetComponent<Button>().onClick.AddListener(TogglePause);
+        }
+
+        static void TogglePause()
+        {
+            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
         }
     }
 }

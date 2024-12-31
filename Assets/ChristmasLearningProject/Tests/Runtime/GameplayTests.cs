@@ -67,6 +67,19 @@ namespace ChristmasLearningProject.Tests.Runtime
         }
 
         [UnityTest]
+        public IEnumerator ResumePause()
+        {
+            yield return Deploy(Vector2.one * 5, Vector2.zero);
+            yield return ClickOn<PauseButton>();
+            
+            var cristalBoatPosition = PositionOf<CristalBoat>();
+            yield return ClickOn<PauseButton>();
+            yield return null;
+
+            Assert.IsFalse(AreCloseEnough(CristalBoat, cristalBoatPosition));
+        }
+        
+        [UnityTest]
         public IEnumerator Win_ByDockingCristal_InHarbour()
         {
             yield return SetDepartureIn(Vector2.one * 5);
