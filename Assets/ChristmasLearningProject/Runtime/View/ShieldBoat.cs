@@ -4,12 +4,9 @@ namespace ChristmasLearningProject.Runtime.View
 {
     public class ShieldBoat : MonoBehaviour
     {
-        public void Move()
-        {
-        }
+        Boat boat;
 
-        public void Refresh()
-        {
-        }
+        public void Configure(Boat boat) => this.boat = boat;
+        public void Refresh() => transform.position = boat.Position;
     }
 }

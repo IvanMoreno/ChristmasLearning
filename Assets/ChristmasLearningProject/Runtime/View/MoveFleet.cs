@@ -8,9 +8,6 @@ namespace ChristmasLearningProject.Runtime.View
         readonly Sea sea;
         readonly IList<Boat> fleet = new List<Boat>();
                
-        CristalBoat cristalBoat;
-        ShieldBoat shieldBoat;
-
         public MoveFleet(Game game, Sea sea)
         {
             this.game = game;
@@ -23,9 +20,6 @@ namespace ChristmasLearningProject.Runtime.View
             
             MoveAllBoatsInFleet(deltaTime);
             sea.Refresh();
-            
-            cristalBoat?.Move();
-            shieldBoat?.Move();
         }
 
         void MoveAllBoatsInFleet(float deltaTime)
@@ -34,16 +28,6 @@ namespace ChristmasLearningProject.Runtime.View
             {
                 boat.Move(deltaTime);
             }
-        }
-
-        public void AddCristalBoat(CristalBoat boat)
-        {
-            cristalBoat = boat;
-        }
-
-        public void AddShieldBoat(ShieldBoat boat)
-        {
-            shieldBoat = boat;
         }
 
         public void Add(Boat member) => fleet.Add(member);

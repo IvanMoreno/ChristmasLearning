@@ -36,15 +36,20 @@ namespace ChristmasLearningProject.Runtime.View
                 var destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (deployCristalBoat)
                 {
-                    var boat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
-                    boat.SendTo(destination);
+                    var boat = Boat.Cristal();
+                    boat.SetRoute(departure, destination);
+                    var physicalBoat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
+                    physicalBoat.Configure(boat);
+                    moveFleet.Add(boat);
                     cristalBoatsInStock--;
-                    moveFleet.AddCristalBoat(boat);
                 }
                 else
                 {
-                    var boat = Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
-                    moveFleet.AddShieldBoat(boat);
+                    var boat = Boat.Shield();
+                    boat.SetRoute(departure, destination);
+                    var physicalBoat = Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
+                    physicalBoat.Configure(boat);
+                    moveFleet.Add(boat);
                     shieldBoatsInStock--;
                 }
                 

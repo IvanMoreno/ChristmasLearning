@@ -13,7 +13,14 @@ namespace ChristmasLearningProject.Runtime.View
 
         public void Move(float deltaTime)
         {
-            Position += (destination - departure) * (deltaTime * 10);
+            Position += (destination - Position) * (deltaTime * 10);
+        }
+
+        public void SetRoute(Vector2 departure, Vector2 destination)
+        {
+            this.departure = departure;
+            this.destination = destination;
+            Position = this.departure;
         }
 
         public static Boat Cristal() => new("Cristal");
