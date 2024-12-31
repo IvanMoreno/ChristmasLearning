@@ -1,4 +1,5 @@
 using ChristmasLearningProject.Runtime.Application;
+using ChristmasLearningProject.Runtime.Domain;
 using Zenject;
 
 namespace ChristmasLearningProject.Runtime.View

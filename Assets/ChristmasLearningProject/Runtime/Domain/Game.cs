@@ -1,6 +1,6 @@
 using System;
 
-namespace ChristmasLearningProject.Runtime.View
+namespace ChristmasLearningProject.Runtime.Domain
 {
     public class Game
     {

@@ -1,4 +1,4 @@
-using ChristmasLearningProject.Runtime.View;
+using ChristmasLearningProject.Runtime.Domain;
 
 namespace ChristmasLearningProject.Runtime.Application
 {

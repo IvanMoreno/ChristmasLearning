@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ChristmasLearningProject.Runtime.View
+namespace ChristmasLearningProject.Runtime.Domain
 {
     public class Boat
     {
