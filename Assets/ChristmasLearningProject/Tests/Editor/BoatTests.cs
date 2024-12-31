@@ -28,4 +28,15 @@ public class BoatTests
         Assert.Less(sut.Position.x, Vector2.zero.x);
         Assert.Less(sut.Position.y, Vector2.zero.y);
     }
+
+    [Test]
+    public void StopAfterReachingDestination()
+    {
+        var sut = Boat.Cristal();
+        sut.SetRoute(Vector2.zero, Vector2.one);
+        
+        sut.Move(10);
+        
+        Assert.AreEqual(Vector2.one, sut.Position);
+    }
 }

@@ -17,6 +17,8 @@ namespace ChristmasLearningProject.Runtime.Domain
                 throw new InvalidOperationException("A valid route must be specified first");
             
             Position += (destination - Position) * (deltaTime * 10);
+            if (Position.x > destination.x || Position.y > destination.y)
+                Position = destination;
         }
 
         public void SetRoute(Vector2 departure, Vector2 destination)
