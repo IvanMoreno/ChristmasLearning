@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class BoatTests
 {
+    Boat sut;
+
+    [SetUp]
+    public void SetUp()
+    {
+        sut = Boat.Cristal();
+    }
+    
     [Test]
     public void MoveBoatTowardsDestination()
     {
-        var sut = Boat.Cristal();
         sut.SetRoute(Vector2.zero, Vector2.one);
         
         sut.Move(1);
@@ -20,7 +27,6 @@ public class BoatTests
     [Test]
     public void MoveBoatTowardsNegativeDirection()
     {
-        var sut = Boat.Cristal();
         sut.SetRoute(Vector2.zero, Vector2.one * -1);
         
         sut.Move(1);
@@ -32,7 +38,6 @@ public class BoatTests
     [Test]
     public void StopAfterReachingDestination()
     {
-        var sut = Boat.Cristal();
         sut.SetRoute(Vector2.zero, Vector2.one);
         
         sut.Move(10);
@@ -43,7 +48,6 @@ public class BoatTests
     [Test]
     public void MoveEvenly()
     {
-        var sut = Boat.Cristal();
         sut.SetRoute(Vector2.zero, Vector2.one);
         
         sut.Move(0.01f);
