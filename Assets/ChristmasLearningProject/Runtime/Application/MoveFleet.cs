@@ -7,30 +7,23 @@ namespace ChristmasLearningProject.Runtime.Application
     {
         readonly Game game;
         readonly Sea sea;
-        readonly IList<Boat> fleet = new List<Boat>();
+        readonly Fleet fleet;
                
-        public MoveFleet(Game game, Sea sea)
+        public MoveFleet(Game game, Sea sea, Fleet fleet)
         {
             this.game = game;
             this.sea = sea;
+            this.fleet = fleet;
         }
 
         public void Execute(float deltaTime)
         {
             if (game.IsPaused) return;
             
-            MoveAllBoatsInFleet(deltaTime);
+            fleet.Move(deltaTime);
             sea.Refresh();
         }
 
-        void MoveAllBoatsInFleet(float deltaTime)
-        {
-            foreach (var boat in fleet)
-            {
-                boat.Move(deltaTime);
-            }
-        }
-
-        public void Add(Boat member) => fleet.Add(member);
+        public void Add(Boat member) => fleet.Join(member);
     }
 }
