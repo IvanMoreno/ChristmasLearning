@@ -18,7 +18,7 @@ public class BoatTests
     }
 
     [Test]
-    public void MoveBoatBackwards()
+    public void MoveBoatTowardsNegativeDirection()
     {
         var sut = Boat.Cristal();
         sut.SetRoute(Vector2.zero, Vector2.one * -1);
