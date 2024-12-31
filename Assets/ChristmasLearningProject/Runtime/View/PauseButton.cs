@@ -1,19 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ChristmasLearningProject.Runtime.View
 {
     public class PauseButton : MonoBehaviour
     {
+        [Inject] TogglePause controller;
+        
         void Start()
         {
-            Time.timeScale = 1;
-            GetComponent<Button>().onClick.AddListener(TogglePause);
-        }
-
-        static void TogglePause()
-        {
-            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+            GetComponent<Button>().onClick.AddListener(controller.Execute);
         }
     }
 }
