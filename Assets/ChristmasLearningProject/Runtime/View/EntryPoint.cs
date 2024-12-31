@@ -9,7 +9,7 @@ namespace ChristmasLearningProject.Runtime.View
 
         void Update()
         {
-            moveFleet.Execute();
+            moveFleet.Execute(Time.deltaTime);
         }
     }
 }

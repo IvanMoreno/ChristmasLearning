@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+
 namespace ChristmasLearningProject.Runtime.View
 {
     public class MoveFleet
     {
         readonly Game game;
-
+        readonly IList<Boat> fleet = new List<Boat>();
+        
         CristalBoat cristalBoat;
         ShieldBoat shieldBoat;
 
@@ -12,9 +15,14 @@ namespace ChristmasLearningProject.Runtime.View
             this.game = game;
         }
 
-        public void Execute()
+        public void Execute(float deltaTime)
         {
             if (game.IsPaused) return;
+            
+            foreach (var boat in fleet)
+            {
+                boat.Move(deltaTime);
+            }
             
             cristalBoat?.Move();
             shieldBoat?.Move();
@@ -29,5 +37,7 @@ namespace ChristmasLearningProject.Runtime.View
         {
             shieldBoat = boat;
         }
+
+        public void Add(Boat member) => fleet.Add(member);
     }
 }
