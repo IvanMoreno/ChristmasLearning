@@ -7,5 +7,9 @@ namespace ChristmasLearningProject.Runtime.View
         public void Move()
         {
         }
+
+        public void Refresh()
+        {
+        }
     }
 }
