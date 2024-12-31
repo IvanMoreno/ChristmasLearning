@@ -17,7 +17,7 @@ namespace ChristmasLearningProject.Runtime.Domain
             if (departure.Equals(destination))
                 throw new InvalidOperationException("A valid route must be specified first");
 
-            Position += (destination - Position).normalized * (deltaTime * Speed);
+            Position += (destination - departure).normalized * (deltaTime * Speed);
             ClampPosition();
         }
 
@@ -40,9 +40,6 @@ namespace ChristmasLearningProject.Runtime.Domain
         public static Boat Cristal() => new();
         public static Boat Shield() => new();
 
-        public void Rewind(float deltaTime)
-        {
-            Move(-deltaTime);
-        }
+        public void Rewind(float deltaTime) => Move(-deltaTime);
     }
 }

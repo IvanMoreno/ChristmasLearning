@@ -68,4 +68,15 @@ public class BoatTests
         
         Assert.AreEqual(Vector2.zero, sut.Position);
     }
+
+    [Test]
+    public void Position_IsNotClamped_DuringRewind()
+    {
+        sut.SetRoute(Vector2.zero, Vector2.one);
+        
+        sut.Rewind(1);
+        
+        Assert.Less(sut.Position.x, Vector2.zero.x);
+        Assert.Less(sut.Position.y, Vector2.zero.y);
+    }
 }
