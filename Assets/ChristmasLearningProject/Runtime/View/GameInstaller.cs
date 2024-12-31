@@ -6,6 +6,7 @@ namespace ChristmasLearningProject.Runtime.View
     {
         public override void InstallBindings()
         {
+            Container.Bind<Game>().AsSingle();
             Container.Bind<MoveFleet>().AsSingle();
         }
     }
