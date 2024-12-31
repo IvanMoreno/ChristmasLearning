@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using static ChristmasLearningProject.Tests.Runtime.Do;
+using static ChristmasLearningProject.Tests.Runtime.Fake;
 using static ChristmasLearningProject.Tests.Runtime.Find;
 using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
@@ -61,7 +62,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return ClickOn<PauseButton>();
             
             var cristalBoatPosition = PositionOf<CristalBoat>();
-            yield return null;
+            yield return Tick();
 
             Assert.IsTrue(AreCloseEnough(CristalBoat, cristalBoatPosition));
         }
@@ -74,7 +75,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             
             var cristalBoatPosition = PositionOf<CristalBoat>();
             yield return ClickOn<PauseButton>();
-            yield return null;
+            yield return Tick();
 
             Assert.IsFalse(AreCloseEnough(CristalBoat, cristalBoatPosition));
         }
