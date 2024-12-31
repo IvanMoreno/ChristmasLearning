@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using static ChristmasLearningProject.Tests.Runtime.Do;
+using static ChristmasLearningProject.Tests.Runtime.Find;
 using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
 using static UnityEngine.Object;
@@ -59,7 +60,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return Deploy(Vector2.one * 5, Vector2.zero);
             yield return ClickOn<PauseButton>();
             
-            var cristalBoatPosition = FindObjectOfType<CristalBoat>().transform.position;
+            var cristalBoatPosition = PositionOf<CristalBoat>();
             yield return null;
 
             Assert.IsTrue(AreCloseEnough(CristalBoat, cristalBoatPosition));
@@ -69,8 +70,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator Win_ByDockingCristal_InHarbour()
         {
             yield return SetDepartureIn(Vector2.one * 5);
-            var harbourPosition = FindObjectOfType<Harbour>().transform.position;
-            yield return SetDestinationIn(harbourPosition);
+            yield return SetDestinationIn(PositionOf<Harbour>());
 
             yield return new WaitUntil(() => FindObjectOfType<WinScreen>() != null);
 
