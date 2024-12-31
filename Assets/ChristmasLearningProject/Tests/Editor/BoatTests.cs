@@ -39,4 +39,18 @@ public class BoatTests
         
         Assert.AreEqual(Vector2.one, sut.Position);
     }
+
+    [Test]
+    public void MoveEvenly()
+    {
+        var sut = Boat.Cristal();
+        sut.SetRoute(Vector2.zero, Vector2.one);
+        
+        sut.Move(0.01f);
+        var firstStepDistance = sut.Position;
+        sut.Move(0.01f);
+        var secondStepDistance = sut.Position;
+        
+        Assert.AreEqual(firstStepDistance - Vector2.zero, secondStepDistance - firstStepDistance);
+    }
 }
