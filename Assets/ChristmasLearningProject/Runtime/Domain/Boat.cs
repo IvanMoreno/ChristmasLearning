@@ -6,6 +6,7 @@ namespace ChristmasLearningProject.Runtime.Domain
 {
     public class Boat
     {
+        const int Speed = 10;
         public Vector2 Position { get; private set; }
         
         Vector2 departure;
@@ -15,8 +16,8 @@ namespace ChristmasLearningProject.Runtime.Domain
         {
             if (departure.Equals(destination))
                 throw new InvalidOperationException("A valid route must be specified first");
-            
-            Position += (destination - Position).normalized * (deltaTime * 10);
+
+            Position += (destination - Position).normalized * (deltaTime * Speed);
             if (Position.x > destination.x || Position.y > destination.y)
                 Position = destination;
         }
