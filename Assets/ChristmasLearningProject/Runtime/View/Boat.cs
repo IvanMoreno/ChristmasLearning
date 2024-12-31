@@ -1,0 +1,22 @@
+using UnityEngine;
+
+namespace ChristmasLearningProject.Runtime.View
+{
+    public class Boat
+    {
+        public readonly string Category;
+        public Vector2 Position { get; private set; }
+        
+        Vector2 departure;
+        Vector2 destination;
+        Boat(string category) => Category = category;
+
+        public void Move(float deltaTime)
+        {
+            Position += (destination - departure) * (deltaTime * 10);
+        }
+
+        public static Boat Cristal() => new("Cristal");
+        public static Boat Shield() => new("Shield");
+    }
+}
