@@ -1,9 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 namespace ChristmasLearningProject.Runtime.View
 {
     public class CaptainFinger : MonoBehaviour
     {
+        [Inject] MoveFleet moveFleet;
+
         [SerializeField] CristalBoat cristalBoatPrefab;
         [SerializeField] ShieldBoat shieldBoatPrefab;
         
@@ -36,10 +39,12 @@ namespace ChristmasLearningProject.Runtime.View
                     var boat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
                     boat.SendTo(destination);
                     cristalBoatsInStock--;
+                    moveFleet.AddCristalBoat(boat);
                 }
                 else
                 {
-                    Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
+                    var boat = Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
+                    moveFleet.AddShieldBoat(boat);
                     shieldBoatsInStock--;
                 }
                 

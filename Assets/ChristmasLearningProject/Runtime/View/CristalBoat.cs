@@ -11,7 +11,7 @@ namespace ChristmasLearningProject.Runtime.View
             this.destination = destination;
         }
 
-        void Update()
+        public void Move()
         {
             transform.position += (destination - transform.position) * (Time.deltaTime * 10);
         }
