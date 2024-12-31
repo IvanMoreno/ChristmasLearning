@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ namespace ChristmasLearningProject.Runtime.Domain
         
         public void Move(float deltaTime)
         {
+            if (departure.Equals(destination))
+                throw new InvalidOperationException("A valid route must be specified first");
+            
             Position += (destination - Position) * (deltaTime * 10);
         }
 
