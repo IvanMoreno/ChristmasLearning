@@ -18,6 +18,11 @@ namespace ChristmasLearningProject.Runtime.Domain
                 throw new InvalidOperationException("A valid route must be specified first");
 
             Position += (destination - Position).normalized * (deltaTime * Speed);
+            ClampPosition();
+        }
+
+        void ClampPosition()
+        {
             if (Position.x > destination.x || Position.y > destination.y)
                 Position = destination;
         }
