@@ -10,7 +10,9 @@ namespace ChristmasLearningProject.Runtime.Domain
         
         Vector2 departure;
         Vector2 destination;
-        
+
+        public void Rewind(float deltaTime) => Move(-deltaTime);
+
         public void Move(float deltaTime)
         {
             if (departure.Equals(destination))
@@ -39,7 +41,5 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public static Boat Cristal() => new();
         public static Boat Shield() => new();
-
-        public void Rewind(float deltaTime) => Move(-deltaTime);
     }
 }
