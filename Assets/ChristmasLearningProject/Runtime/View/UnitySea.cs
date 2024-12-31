@@ -1,3 +1,4 @@
+using ChristmasLearningProject.Runtime.Application;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Runtime.View

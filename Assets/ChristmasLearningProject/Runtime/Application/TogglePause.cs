@@ -1,4 +1,6 @@
-namespace ChristmasLearningProject.Runtime.View
+using ChristmasLearningProject.Runtime.View;
+
+namespace ChristmasLearningProject.Runtime.Application
 {
     public class TogglePause
     {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using ChristmasLearningProject.Runtime.View;
 
-namespace ChristmasLearningProject.Runtime.View
+namespace ChristmasLearningProject.Runtime.Application
 {
     public class MoveFleet
     {

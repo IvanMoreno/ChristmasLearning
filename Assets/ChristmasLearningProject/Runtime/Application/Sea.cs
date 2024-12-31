@@ -1,4 +1,4 @@
-namespace ChristmasLearningProject.Runtime.View
+namespace ChristmasLearningProject.Runtime.Application
 {
     public interface Sea
     {
