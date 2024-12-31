@@ -23,7 +23,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         void ClampPosition()
         {
             if (destination.IsGreaterThan(departure) && Position.IsGreaterThan(destination) || 
-                departure.IsGreaterThan(destination) && Position.IsGreaterThan(departure))
+                departure.IsGreaterThan(destination) && Position.IsLessThan(destination))
                 Position = destination;
         }
 

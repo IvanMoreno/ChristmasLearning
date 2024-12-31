@@ -1,6 +1,5 @@
 using ChristmasLearningProject.Runtime.Domain;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using UnityEngine;
 
 public class BoatTests
@@ -89,5 +88,15 @@ public class BoatTests
         
         Assert.Greater(sut.Position.x, Vector2.zero.x);
         Assert.Greater(sut.Position.y, Vector2.zero.y);
+    }
+
+    [Test]
+    public void ClampPosition_AfterReaching_Destination_InNegativeDirection()
+    {
+        sut.SetRoute(Vector2.one, Vector2.zero);
+        
+        sut.Move(10);
+        
+        Assert.AreEqual(Vector2.zero, sut.Position);
     }
 }

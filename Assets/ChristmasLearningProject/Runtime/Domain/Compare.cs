@@ -8,5 +8,10 @@ namespace ChristmasLearningProject.Runtime.Domain
         {
             return theOne.x > theOther.x || theOne.y > theOther.y;
         }
+        
+        public static bool IsLessThan(this Vector2 theOne, Vector2 theOther)
+        {
+            return theOne.x < theOther.x || theOne.y < theOther.y;
+        }
     }
 }
