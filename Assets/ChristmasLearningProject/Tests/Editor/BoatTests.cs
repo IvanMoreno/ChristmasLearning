@@ -79,4 +79,15 @@ public class BoatTests
         Assert.Less(sut.Position.x, Vector2.zero.x);
         Assert.Less(sut.Position.y, Vector2.zero.y);
     }
+
+    [Test]
+    public void PositionClamping_TakesIntoAccount_MovementDirection()
+    {
+        sut.SetRoute(Vector2.one, Vector2.zero);
+        
+        sut.Move(0.01f);
+        
+        Assert.Greater(sut.Position.x, Vector2.zero.x);
+        Assert.Greater(sut.Position.y, Vector2.zero.y);
+    }
 }

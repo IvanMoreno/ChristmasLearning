@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Runtime.Domain
@@ -23,7 +22,8 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         void ClampPosition()
         {
-            if (Position.x > destination.x || Position.y > destination.y)
+            if (destination.IsGreaterThan(departure) && Position.IsGreaterThan(destination) || 
+                departure.IsGreaterThan(destination) && Position.IsGreaterThan(departure))
                 Position = destination;
         }
 
