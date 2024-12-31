@@ -52,6 +52,18 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(destination)));
         }
+        
+        [UnityTest]
+        public IEnumerator FreezeCristalBoat_DuringPause()
+        {
+            yield return Deploy(Vector2.one * 5, Vector2.zero);
+            yield return ClickOn<PauseButton>();
+            
+            var cristalBoatPosition = FindObjectOfType<CristalBoat>().transform.position;
+            yield return null;
+
+            Assert.IsTrue(AreCloseEnough(CristalBoat, cristalBoatPosition));
+        }
 
         [UnityTest]
         public IEnumerator Win_ByDockingCristal_InHarbour()
@@ -107,6 +119,12 @@ namespace ChristmasLearningProject.Tests.Runtime
         static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f) 
             => Vector2.Distance(theFirst.position, destination) < distance;
 
+        static IEnumerator Deploy(Vector2 fromDeparture, Vector2 toDestination)
+        {
+            yield return SetDepartureIn(fromDeparture);
+            yield return SetDestinationIn(toDestination);
+        }
+        
         static IEnumerator SetDepartureIn(Vector2 point)
         {
             yield return ClickInWorld(point);
