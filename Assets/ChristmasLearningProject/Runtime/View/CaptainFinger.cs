@@ -1,4 +1,3 @@
-using ChristmasLearningProject.Runtime.Application;
 using ChristmasLearningProject.Runtime.Domain;
 using UnityEngine;
 using Zenject;
@@ -7,7 +6,7 @@ namespace ChristmasLearningProject.Runtime.View
 {
     public class CaptainFinger : MonoBehaviour
     {
-        [Inject] MoveFleet moveFleet;
+        [Inject] Fleet fleet;
 
         [SerializeField] CristalBoat cristalBoatPrefab;
         [SerializeField] ShieldBoat shieldBoatPrefab;
@@ -42,7 +41,7 @@ namespace ChristmasLearningProject.Runtime.View
                     boat.SetRoute(departure, destination);
                     var physicalBoat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
                     physicalBoat.Configure(boat);
-                    moveFleet.Add(boat);
+                    fleet.Join(boat);
                     cristalBoatsInStock--;
                 }
                 else
@@ -51,7 +50,7 @@ namespace ChristmasLearningProject.Runtime.View
                     boat.SetRoute(departure, destination);
                     var physicalBoat = Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
                     physicalBoat.Configure(boat);
-                    moveFleet.Add(boat);
+                    fleet.Join(boat);
                     shieldBoatsInStock--;
                 }
                 

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using ChristmasLearningProject.Runtime.Domain;
 
 namespace ChristmasLearningProject.Runtime.Application
@@ -23,7 +22,5 @@ namespace ChristmasLearningProject.Runtime.Application
             fleet.Move(deltaTime);
             sea.Refresh();
         }
-
-        public void Add(Boat member) => fleet.Join(member);
     }
 }
