@@ -12,6 +12,7 @@ namespace ChristmasLearningProject.Runtime.View
             Container.Bind<Fleet>().AsSingle();
             Container.Bind<MoveFleet>().AsSingle();
             Container.Bind<TogglePause>().AsSingle();
+            Container.Bind<Rewind>().AsSingle();
             Container.BindInterfacesTo<UnitySea>().AsSingle();
         }
     }

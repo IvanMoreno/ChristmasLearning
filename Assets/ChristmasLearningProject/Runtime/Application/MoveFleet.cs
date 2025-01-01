@@ -7,7 +7,7 @@ namespace ChristmasLearningProject.Runtime.Application
         readonly Game game;
         readonly Sea sea;
         readonly Fleet fleet;
-               
+
         public MoveFleet(Game game, Sea sea, Fleet fleet)
         {
             this.game = game;
@@ -18,8 +18,12 @@ namespace ChristmasLearningProject.Runtime.Application
         public void Execute(float deltaTime)
         {
             if (game.IsPaused) return;
+
+            if (game.IsRewind)
+                fleet.Rewind(deltaTime);
+            else 
+                fleet.Move(deltaTime);
             
-            fleet.Move(deltaTime);
             sea.Refresh();
         }
     }

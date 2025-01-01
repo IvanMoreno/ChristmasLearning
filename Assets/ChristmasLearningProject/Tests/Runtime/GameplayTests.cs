@@ -111,11 +111,26 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator CanDeployTwoBoats()
         {
-            yield return DeployCristalBoat(Between(Vector2.one * 1, Vector2.one));
+            yield return DeployCristalBoat(Between(Vector2.one * 2, Vector2.one));
             yield return DeployShieldBoat(Between(Vector2.down, Vector2.one));
             
             Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
             Assert.IsNotNull(FindObjectOfType<CristalBoat>());
+        }
+
+        [UnityTest]
+        public IEnumerator Rewind()
+        {
+            yield return SetDestinationIn(Vector2.one * 5);
+            var departure = Input.mousePosition;
+            yield return SetDestinationIn(Vector2.one);
+            var destination = Input.mousePosition;
+            
+            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
+            yield return ClickOn<RewindButton>();
+            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(departure)));
+            
+            Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(departure)));
         }
 
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
