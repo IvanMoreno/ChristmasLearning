@@ -32,5 +32,12 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public static Boat Cristal() => new();
         public static Boat Shield() => new();
+
+        public static Boat WithRoute(Route route)
+        {
+            var result = new Boat();
+            result.SetRoute(route);
+            return result;
+        }
     }
 }

@@ -9,8 +9,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void MoveAllBoatsOfFleet()
         {
-            var doc = new Boat();
-            doc.SetRoute(Route.Between(Vector2.zero, Vector2.one));
+            var doc = Boat.WithRoute(Route.Between(Vector2.zero, Vector2.one));
             var sut = new Fleet();
             sut.Join(doc);
             
