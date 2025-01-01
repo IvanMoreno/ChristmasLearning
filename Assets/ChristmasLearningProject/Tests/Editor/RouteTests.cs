@@ -20,5 +20,11 @@ namespace ChristmasLearningProject.Tests.Editor
             Assert.IsFalse(Route.Between(Vector2.one, Vector2.zero).ReachedDepartureAt(Vector2.zero));
             Assert.IsTrue(Route.Between(Vector2.one, Vector2.zero).ReachedDepartureAt(Vector2.one * 2));
         }
+
+        [Test]
+        public void ReachDestination()
+        {
+            Assert.IsTrue(Route.Between(Vector2.zero, Vector2.one).ReachedDestinationAt(Vector2.one));
+        }
     }
 }
