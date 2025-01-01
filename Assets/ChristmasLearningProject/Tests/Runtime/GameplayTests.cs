@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
@@ -28,7 +29,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             Time.timeScale = 1;
         }
-        
+
         [Test]
         public void Hide_WinScreen_OnStart()
         {
@@ -57,17 +58,17 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return DeployCristalBoat(Between(Vector2.one * 5, Vector2.zero));
             var destination = Input.mousePosition;
 
-            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
+            yield return WaitUntilReaching(CristalBoat, destination);
 
             Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(destination)));
         }
-        
+
         [UnityTest]
         public IEnumerator FreezeCristalBoat_DuringPause()
         {
             yield return DeployCristalBoat(Between(Vector2.one * 5, Vector2.zero));
             yield return ClickOn<PauseButton>();
-            
+
             var cristalBoatPosition = PositionOf<CristalBoat>();
             yield return Tick();
 
@@ -79,14 +80,14 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return DeployCristalBoat(Between(Vector2.one * 5, Vector2.zero));
             yield return ClickOn<PauseButton>();
-            
+
             var cristalBoatPosition = PositionOf<CristalBoat>();
             yield return ClickOn<PauseButton>();
             yield return Tick();
 
             Assert.IsFalse(AreCloseEnough(CristalBoat, cristalBoatPosition));
         }
-        
+
         [UnityTest]
         public IEnumerator Win_ByDockingCristal_InHarbour()
         {
@@ -102,7 +103,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return DeployCristalBoat(Between(Vector2.one * 2, Vector2.one));
             yield return DeployCristalBoat(Between(Vector2.one * 2, Vector2.one));
-            
+
             Assert.AreEqual(1, FindObjectsOfType<CristalBoat>().Length);
         }
 
@@ -110,7 +111,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         public IEnumerator Deploy_ShieldBoat()
         {
             yield return DeployShieldBoat(Between(Vector2.down, Vector2.one));
-            
+
             Assert.IsNull(FindObjectOfType<CristalBoat>());
             Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
         }
@@ -120,7 +121,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return DeployCristalBoat(Between(Vector2.one * 2, Vector2.one));
             yield return DeployShieldBoat(Between(Vector2.down, Vector2.one));
-            
+
             Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
             Assert.IsNotNull(FindObjectOfType<CristalBoat>());
         }
@@ -132,14 +133,14 @@ namespace ChristmasLearningProject.Tests.Runtime
             var departure = Input.mousePosition;
             yield return SetDestinationIn(Vector2.one);
             var destination = Input.mousePosition;
-            
-            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
+
+            yield return WaitUntilReaching(CristalBoat, destination);
             yield return ClickOn<RewindButton>();
-            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(departure)));
-            
+            yield return WaitUntilReaching(CristalBoat, departure);
+
             Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(departure)));
         }
-        
+
         [UnityTest]
         public IEnumerator FastForward()
         {
@@ -147,36 +148,36 @@ namespace ChristmasLearningProject.Tests.Runtime
             var departure = Input.mousePosition;
             yield return SetDestinationIn(Vector2.one);
             var destination = Input.mousePosition;
-            
-            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
+
+            yield return WaitUntilReaching(CristalBoat, destination);
             yield return ClickOn<RewindButton>();
-            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(departure)));
+            yield return WaitUntilReaching(CristalBoat, departure);
             yield return ClickOn<FastForwardButton>();
-            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
-            
+            yield return WaitUntilReaching(CristalBoat, destination);
+
             Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(destination)));
         }
 
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
 
-        static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f) 
+        static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f)
             => Vector2.Distance(theFirst.position, destination) < distance;
-        
-        static IEnumerator SetDepartureIn(Vector2 point)
-        {
-            yield return ClickInWorld(point);
-        }
 
-        static IEnumerator SetDestinationIn(Vector2 point)
-        {
-            yield return ClickInWorld(point);
-        }
-        
+        static IEnumerator SetDepartureIn(Vector2 point) => ClickInWorld(point);
+        static IEnumerator SetDestinationIn(Vector2 point) => ClickInWorld(point);
+
         static Vector3 InWorld(Vector2 screenPosition)
         {
             var toWorldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             toWorldPosition.z = 0;
             return toWorldPosition;
+        }
+
+        static IEnumerator WaitUntilReaching(Transform boat, Vector2 screenPosition)
+        {
+            var startTime = DateTime.Now;
+            while (!AreCloseEnough(boat, InWorld(screenPosition)) && (DateTime.Now - startTime).Seconds < (5))
+                yield return null;
         }
     }
 }
