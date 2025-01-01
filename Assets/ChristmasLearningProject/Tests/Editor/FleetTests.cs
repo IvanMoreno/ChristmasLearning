@@ -42,5 +42,20 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsTrue(doc.Position.IsLessThan(one));
         }
+
+        [Test]
+        public void RewindAllBoats_UntilAllOfThemReachedDeparture()
+        {
+            var firstBoat = Boat.WithRoute(Between(zero, one));
+            var latterJoinedBoat = Boat.WithRoute(Between(zero, one));
+            var sut = Fleet.FromBoats(firstBoat);
+            
+            sut.Move(1);
+            sut.Join(latterJoinedBoat);
+            sut.Rewind(1);
+            
+            Assert.IsTrue(latterJoinedBoat.Position.IsLessThan(zero));
+            Assert.AreEqual(zero, firstBoat.Position);
+        }
     }
 }

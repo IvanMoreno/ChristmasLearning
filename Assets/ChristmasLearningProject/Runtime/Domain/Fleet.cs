@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
 namespace ChristmasLearningProject.Runtime.Domain
 {
@@ -19,9 +19,11 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public void Rewind(float deltaTime)
         {
+            if (members.All(x => x.ReachedDeparture()))
+                return;
+            
             foreach (var boat in members)
             {
-                if (boat.Position.Equals(Vector2.zero)) continue;
                 boat.Rewind(deltaTime);
             }
         }

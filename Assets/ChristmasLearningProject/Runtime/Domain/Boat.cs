@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Runtime.Domain
 {
     public class Boat
     {
-        const int Speed = 10;
+        const int Speed = 1;
         public Vector2 Position { get; private set; }
         Route route;
 
@@ -30,7 +29,10 @@ namespace ChristmasLearningProject.Runtime.Domain
             Position = route.Departure;
         }
 
+        public bool ReachedDeparture() => route.ReachedDepartureAt(Position);
+
         public static Boat Cristal() => new();
+
         public static Boat Shield() => new();
 
         public static Boat WithRoute(Route route)
