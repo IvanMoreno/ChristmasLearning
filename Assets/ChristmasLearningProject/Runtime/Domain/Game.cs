@@ -32,6 +32,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         public void FastForward()
         {
             IsRewind = false;
+            IsPaused = false;
         }
     }
 }
