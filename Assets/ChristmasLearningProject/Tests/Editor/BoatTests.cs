@@ -2,97 +2,100 @@ using ChristmasLearningProject.Runtime.Domain;
 using NUnit.Framework;
 using UnityEngine;
 
-public class BoatTests
+namespace ChristmasLearningProject.Tests.Editor
 {
-    Boat sut;
-
-    [SetUp]
-    public void SetUp()
+    public class BoatTests
     {
-        sut = Boat.Cristal();
-    }
+        Boat sut;
 
-    [Test]
-    public void MoveBoatTowardsDestination()
-    {
-        sut.SetRoute(Vector2.zero, Vector2.one);
+        [SetUp]
+        public void SetUp()
+        {
+            sut = Boat.Cristal();
+        }
 
-        sut.Move(1);
+        [Test]
+        public void MoveBoatTowardsDestination()
+        {
+            sut.SetRoute(Vector2.zero, Vector2.one);
 
-        Assert.IsTrue(sut.Position.IsGreaterThan(Vector2.zero));
-    }
+            sut.Move(1);
 
-    [Test]
-    public void MoveBoatTowardsNegativeDirection()
-    {
-        sut.SetRoute(Vector2.zero, Vector2.one * -1);
+            Assert.IsTrue(sut.Position.IsGreaterThan(Vector2.zero));
+        }
 
-        sut.Move(1);
+        [Test]
+        public void MoveBoatTowardsNegativeDirection()
+        {
+            sut.SetRoute(Vector2.zero, Vector2.one * -1);
 
-        Assert.IsTrue(sut.Position.IsLessThan(Vector2.zero));
-    }
+            sut.Move(1);
 
-    [Test]
-    public void StopAfterReachingDestination()
-    {
-        sut.SetRoute(Vector2.zero, Vector2.one);
+            Assert.IsTrue(sut.Position.IsLessThan(Vector2.zero));
+        }
 
-        sut.Move(10);
+        [Test]
+        public void StopAfterReachingDestination()
+        {
+            sut.SetRoute(Vector2.zero, Vector2.one);
 
-        Assert.AreEqual(Vector2.one, sut.Position);
-    }
+            sut.Move(10);
 
-    [Test]
-    public void MoveEvenly()
-    {
-        sut.SetRoute(Vector2.zero, Vector2.one);
+            Assert.AreEqual(Vector2.one, sut.Position);
+        }
 
-        sut.Move(0.01f);
-        var firstStepDistance = sut.Position;
-        sut.Move(0.01f);
-        var secondStepDistance = sut.Position;
+        [Test]
+        public void MoveEvenly()
+        {
+            sut.SetRoute(Vector2.zero, Vector2.one);
 
-        Assert.AreEqual(firstStepDistance - Vector2.zero, secondStepDistance - firstStepDistance);
-    }
+            sut.Move(0.01f);
+            var firstStepDistance = sut.Position;
+            sut.Move(0.01f);
+            var secondStepDistance = sut.Position;
 
-    [Test]
-    public void RewindMovement()
-    {
-        sut.SetRoute(Vector2.zero, Vector2.one);
+            Assert.AreEqual(firstStepDistance - Vector2.zero, secondStepDistance - firstStepDistance);
+        }
 
-        sut.Move(0.01f);
-        sut.Rewind(0.01f);
+        [Test]
+        public void RewindMovement()
+        {
+            sut.SetRoute(Vector2.zero, Vector2.one);
 
-        Assert.AreEqual(Vector2.zero, sut.Position);
-    }
+            sut.Move(0.01f);
+            sut.Rewind(0.01f);
 
-    [Test]
-    public void Position_IsNotClamped_DuringRewind()
-    {
-        sut.SetRoute(Vector2.zero, Vector2.one);
+            Assert.AreEqual(Vector2.zero, sut.Position);
+        }
 
-        sut.Rewind(1);
+        [Test]
+        public void Position_IsNotClamped_DuringRewind()
+        {
+            sut.SetRoute(Vector2.zero, Vector2.one);
 
-        Assert.IsTrue(sut.Position.IsLessThan(Vector2.zero));
-    }
+            sut.Rewind(1);
 
-    [Test]
-    public void PositionClamping_TakesIntoAccount_MovementDirection()
-    {
-        sut.SetRoute(Vector2.one, Vector2.zero);
+            Assert.IsTrue(sut.Position.IsLessThan(Vector2.zero));
+        }
 
-        sut.Move(0.01f);
+        [Test]
+        public void PositionClamping_TakesIntoAccount_MovementDirection()
+        {
+            sut.SetRoute(Vector2.one, Vector2.zero);
 
-        Assert.IsTrue(sut.Position.IsGreaterThan(Vector2.zero));
-    }
+            sut.Move(0.01f);
 
-    [Test]
-    public void ClampPosition_AfterReaching_Destination_InNegativeDirection()
-    {
-        sut.SetRoute(Vector2.one, Vector2.zero);
+            Assert.IsTrue(sut.Position.IsGreaterThan(Vector2.zero));
+        }
 
-        sut.Move(10);
+        [Test]
+        public void ClampPosition_AfterReaching_Destination_InNegativeDirection()
+        {
+            sut.SetRoute(Vector2.one, Vector2.zero);
 
-        Assert.AreEqual(Vector2.zero, sut.Position);
+            sut.Move(10);
+
+            Assert.AreEqual(Vector2.zero, sut.Position);
+        }
     }
 }
