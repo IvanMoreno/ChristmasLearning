@@ -50,9 +50,9 @@ namespace ChristmasLearningProject.Tests.Editor
             var latterJoinedBoat = Boat.WithRoute(Between(zero, one));
             var sut = Fleet.FromBoats(firstBoat);
             
-            sut.Move(1);
+            sut.Move(.1f);
             sut.Join(latterJoinedBoat);
-            sut.Rewind(1);
+            sut.Rewind(.1f);
             
             Assert.IsTrue(latterJoinedBoat.Position.IsLessThan(zero));
             Assert.AreEqual(zero, firstBoat.Position);

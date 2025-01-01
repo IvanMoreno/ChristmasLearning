@@ -4,7 +4,7 @@ namespace ChristmasLearningProject.Runtime.Domain
 {
     public class Boat
     {
-        const int Speed = 1;
+        const int Speed = 10;
         public Vector2 Position { get; private set; }
         Route route;
 
