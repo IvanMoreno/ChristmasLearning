@@ -9,13 +9,16 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void MoveAllBoatsOfFleet()
         {
-            var doc = Boat.WithRoute(Route.Between(Vector2.zero, Vector2.one));
+            var firstBoat = Boat.WithRoute(Route.Between(Vector2.zero, Vector2.one));
+            var secondBoat = Boat.WithRoute(Route.Between(Vector2.zero, Vector2.one));
             var sut = new Fleet();
-            sut.Join(doc);
+            sut.Join(firstBoat);
+            sut.Join(secondBoat);
             
             sut.Move(1);
             
-            Assert.IsTrue(doc.Position.IsGreaterThan(Vector2.zero));
+            Assert.IsTrue(firstBoat.Position.IsGreaterThan(Vector2.zero));
+            Assert.IsTrue(secondBoat.Position.IsGreaterThan(Vector2.zero));
         }
     }
 }
