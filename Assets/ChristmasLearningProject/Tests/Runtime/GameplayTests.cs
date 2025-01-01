@@ -19,7 +19,14 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnitySetUp]
         public IEnumerator SetUp()
         {
+            Time.timeScale = 5;
             yield return FromLevelEditor().WithShieldBoatEnabled().Build();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Time.timeScale = 1;
         }
         
         [Test]
