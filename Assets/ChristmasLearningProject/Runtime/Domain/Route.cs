@@ -18,15 +18,11 @@ namespace ChristmasLearningProject.Runtime.Domain
             Destination = destination;
         }
 
-        public bool ReachedDestinationAt(Vector2 position)
-        {
-            return (position * Direction).IsGreaterThan(Destination * Direction) || position.Equals(Destination);
-        }
+        public bool ReachedDestinationAt(Vector2 position) 
+            => (position * Direction).IsGreaterThan(Destination * Direction) || position.Equals(Destination);
 
-        public bool ReachedDepartureAt(Vector2 position)
-        {
-            return (position * Direction).IsLessThan(Departure * Direction) || position.Equals(Departure);
-        }
+        public bool ReachedDepartureAt(Vector2 position) 
+            => (position * Direction).IsLessThan(Departure * Direction) || position.Equals(Departure);
 
         public static Route Between(Vector2 departure, Vector2 destination) => new(departure, destination);
     }
