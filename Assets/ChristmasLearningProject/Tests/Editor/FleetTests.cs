@@ -7,6 +7,8 @@ namespace ChristmasLearningProject.Tests.Editor
 {
     public class FleetTests
     {
+        const float DeltaTime = 0.1f;
+        
         [Test]
         public void MoveAllBoatsOfFleet()
         {
@@ -14,7 +16,7 @@ namespace ChristmasLearningProject.Tests.Editor
             var secondBoat = Boat.WithRoute(Between(zero, one));
             var sut = Fleet.FromBoats(firstBoat, secondBoat);
             
-            sut.Move(1);
+            sut.Move(DeltaTime);
             
             Assert.IsTrue(firstBoat.Position.IsGreaterThan(zero));
             Assert.IsTrue(secondBoat.Position.IsGreaterThan(zero));
@@ -26,7 +28,7 @@ namespace ChristmasLearningProject.Tests.Editor
             var doc = Boat.WithRoute(Between(zero, one));
             var sut = Fleet.FromBoats(doc);
             
-            sut.Rewind(1);
+            sut.Rewind(DeltaTime);
             
             Assert.IsTrue(doc.Position.Equals(zero));
         }
@@ -37,8 +39,8 @@ namespace ChristmasLearningProject.Tests.Editor
             var doc = Boat.WithRoute(Between(zero, one));
             var sut = Fleet.FromBoats(doc);
             
-            sut.Move(1);
-            sut.Rewind(.1f);
+            sut.Move(DeltaTime * 10);
+            sut.Rewind(DeltaTime);
             
             Assert.IsTrue(doc.Position.IsLessThan(one));
         }
@@ -50,9 +52,9 @@ namespace ChristmasLearningProject.Tests.Editor
             var latterJoinedBoat = Boat.WithRoute(Between(zero, one));
             var sut = Fleet.FromBoats(firstBoat);
             
-            sut.Move(.1f);
+            sut.Move(DeltaTime);
             sut.Join(latterJoinedBoat);
-            sut.Rewind(.1f);
+            sut.Rewind(DeltaTime);
             
             Assert.IsTrue(latterJoinedBoat.Position.IsLessThan(zero));
             Assert.AreEqual(zero, firstBoat.Position);
