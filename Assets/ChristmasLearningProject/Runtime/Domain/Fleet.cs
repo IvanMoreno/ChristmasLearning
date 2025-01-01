@@ -15,5 +15,9 @@ namespace ChristmasLearningProject.Runtime.Domain
                 boat.Move(deltaTime);
             }
         }
+
+        public void Rewind(int deltaTime)
+        {
+        }
     }
 }
