@@ -1,14 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using static ChristmasLearningProject.Runtime.Domain.Route;
 using static ChristmasLearningProject.Tests.Runtime.Do;
 using static ChristmasLearningProject.Tests.Runtime.Fake;
 using static ChristmasLearningProject.Tests.Runtime.Find;
 using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.MouseOperations;
+using static ChristmasLearningProject.Tests.Runtime.Simulate;
 using static UnityEngine.Object;
 
 namespace ChristmasLearningProject.Tests.Runtime
@@ -46,8 +47,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator MoveCristalBoat_TowardsItsDestination()
         {
-            yield return SetDepartureIn(Vector2.one * 5);
-            yield return SetDestinationIn(Vector2.zero);
+            yield return DeployCristalBoat(Between(Vector2.one * 5, Vector2.zero));
             var destination = Input.mousePosition;
 
             yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
@@ -58,7 +58,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator FreezeCristalBoat_DuringPause()
         {
-            yield return Deploy(Vector2.one * 5, Vector2.zero);
+            yield return DeployCristalBoat(Between(Vector2.one * 5, Vector2.zero));
             yield return ClickOn<PauseButton>();
             
             var cristalBoatPosition = PositionOf<CristalBoat>();
@@ -70,7 +70,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator ResumePause()
         {
-            yield return Deploy(Vector2.one * 5, Vector2.zero);
+            yield return DeployCristalBoat(Between(Vector2.one * 5, Vector2.zero));
             yield return ClickOn<PauseButton>();
             
             var cristalBoatPosition = PositionOf<CristalBoat>();
@@ -83,8 +83,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator Win_ByDockingCristal_InHarbour()
         {
-            yield return SetDepartureIn(Vector2.one * 5);
-            yield return SetDestinationIn(PositionOf<Harbour>());
+            yield return DeployCristalBoat(Between(Vector2.one * 5, PositionOf<Harbour>()));
 
             yield return new WaitUntil(() => FindObjectOfType<WinScreen>() != null);
 
@@ -94,10 +93,8 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator CristalBoat_CanOnlyBeDeployed_Once()
         {
-            yield return SetDepartureIn(Vector2.one * 2);
-            yield return SetDestinationIn(Vector2.one);
-            yield return SetDepartureIn(Vector2.one * 2);
-            yield return SetDestinationIn(Vector2.one);
+            yield return DeployCristalBoat(Between(Vector2.one * 2, Vector2.one));
+            yield return DeployCristalBoat(Between(Vector2.one * 2, Vector2.one));
             
             Assert.AreEqual(1, FindObjectsOfType<CristalBoat>().Length);
         }
@@ -105,10 +102,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator Deploy_ShieldBoat()
         {
-            yield return ClickOn<ShieldBoatSelectionButton>();
-
-            yield return SetDepartureIn(Vector2.one * 2);
-            yield return SetDestinationIn(Vector2.one);
+            yield return DeployShieldBoat(Between(Vector2.down, Vector2.one));
             
             Assert.IsNull(FindObjectOfType<CristalBoat>());
             Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
@@ -117,13 +111,9 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator CanDeployTwoBoats()
         {
-            yield return SetDepartureIn(Vector2.one * 2);
-            yield return SetDestinationIn(Vector2.one);
+            yield return DeployCristalBoat(Between(Vector2.one * 1, Vector2.one));
+            yield return DeployShieldBoat(Between(Vector2.down, Vector2.one));
             
-            yield return ClickOn<ShieldBoatSelectionButton>();
-            yield return SetDepartureIn(Vector2.down);
-            yield return SetDestinationIn(Vector2.one);
-
             Assert.IsNotNull(FindObjectOfType<ShieldBoat>());
             Assert.IsNotNull(FindObjectOfType<CristalBoat>());
         }
@@ -132,12 +122,6 @@ namespace ChristmasLearningProject.Tests.Runtime
 
         static bool AreCloseEnough(Transform theFirst, Vector2 destination, float distance = 0.05f) 
             => Vector2.Distance(theFirst.position, destination) < distance;
-
-        static IEnumerator Deploy(Vector2 fromDeparture, Vector2 toDestination)
-        {
-            yield return SetDepartureIn(fromDeparture);
-            yield return SetDestinationIn(toDestination);
-        }
         
         static IEnumerator SetDepartureIn(Vector2 point)
         {
@@ -148,8 +132,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return ClickInWorld(point);
         }
-
-
+        
         static Vector3 InWorld(Vector2 screenPosition)
         {
             var toWorldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
