@@ -30,5 +30,17 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsTrue(doc.Position.Equals(zero));
         }
+
+        [Test]
+        public void RewindFleet_RewindsAllItsMembers()
+        {
+            var doc = Boat.WithRoute(Between(zero, one));
+            var sut = Fleet.FromBoats(doc);
+            
+            sut.Move(1);
+            sut.Rewind(.1f);
+            
+            Assert.IsTrue(doc.Position.IsLessThan(one));
+        }
     }
 }
