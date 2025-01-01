@@ -26,7 +26,7 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public bool ReachedDepartureAt(Vector2 position)
         {
-            return position.IsLessThan(Departure) || position.Equals(Departure);
+            return position.IsLessThan(Departure * Direction) || position.Equals(Departure);
         }
     }
 }

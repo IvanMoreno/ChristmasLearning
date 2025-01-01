@@ -13,5 +13,11 @@ namespace ChristmasLearningProject.Tests.Editor
             Assert.IsTrue(new Route(Vector2.zero, Vector2.one).ReachedDepartureAt(Vector2.one * -1));
             Assert.IsFalse(new Route(Vector2.zero, Vector2.one).ReachedDepartureAt(Vector2.one));
         }
+        
+        [Test]
+        public void ReachDepartureGoingInANegativeDirection()
+        {
+            Assert.IsFalse(new Route(Vector2.one, Vector2.zero).ReachedDepartureAt(Vector2.zero));
+        }
     }
 }
