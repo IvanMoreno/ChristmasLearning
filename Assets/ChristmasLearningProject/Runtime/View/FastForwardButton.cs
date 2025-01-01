@@ -5,13 +5,13 @@ using Zenject;
 
 namespace ChristmasLearningProject.Runtime.View
 {
-    public class RewindButton : MonoBehaviour
+    public class FastForwardButton : MonoBehaviour
     {
         [Inject] ChangeTimeDirection controller;
         
         void Start()
         {
-            GetComponent<Button>().onClick.AddListener(controller.Rewind);
+            GetComponent<Button>().onClick.AddListener(controller.FastForward);
         }
     }
 }

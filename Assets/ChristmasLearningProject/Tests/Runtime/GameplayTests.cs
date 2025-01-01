@@ -132,6 +132,23 @@ namespace ChristmasLearningProject.Tests.Runtime
             
             Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(departure)));
         }
+        
+        [UnityTest]
+        public IEnumerator FastForward()
+        {
+            yield return SetDestinationIn(Vector2.one * 5);
+            var departure = Input.mousePosition;
+            yield return SetDestinationIn(Vector2.one);
+            var destination = Input.mousePosition;
+            
+            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
+            yield return ClickOn<RewindButton>();
+            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(departure)));
+            yield return ClickOn<FastForwardButton>();
+            yield return new WaitUntil(() => AreCloseEnough(CristalBoat, InWorld(destination)));
+            
+            Assert.IsTrue(AreCloseEnough(CristalBoat, InWorld(destination)));
+        }
 
         static Transform CristalBoat => FindObjectOfType<CristalBoat>().transform;
 
