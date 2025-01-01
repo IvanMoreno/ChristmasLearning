@@ -1,5 +1,6 @@
 using ChristmasLearningProject.Runtime.Domain;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Tests.Editor

@@ -23,5 +23,10 @@ namespace ChristmasLearningProject.Runtime.Domain
             return Destination.IsGreaterThan(Departure) && position.IsGreaterThan(Destination) ||
                    Departure.IsGreaterThan(Destination) && position.IsLessThan(Destination);
         }
+
+        public bool ReachedDepartureAt(Vector2 zero)
+        {
+            return true;
+        }
     }
 }
