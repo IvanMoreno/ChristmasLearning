@@ -12,9 +12,7 @@ namespace ChristmasLearningProject.Tests.Editor
         {
             var firstBoat = Boat.WithRoute(Between(zero, one));
             var secondBoat = Boat.WithRoute(Between(zero, one));
-            var sut = new Fleet();
-            sut.Join(firstBoat);
-            sut.Join(secondBoat);
+            var sut = Fleet.FromBoats(firstBoat, secondBoat);
             
             sut.Move(1);
             
@@ -26,8 +24,7 @@ namespace ChristmasLearningProject.Tests.Editor
         public void RewindAFleet_AtStart_KeepsThemInDeparture()
         {
             var doc = Boat.WithRoute(Between(zero, one));
-            var sut = new Fleet();
-            sut.Join(doc);
+            var sut = Fleet.FromBoats(doc);
             
             sut.Rewind(1);
             

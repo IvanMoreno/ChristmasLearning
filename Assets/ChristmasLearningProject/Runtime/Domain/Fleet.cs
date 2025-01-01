@@ -19,5 +19,15 @@ namespace ChristmasLearningProject.Runtime.Domain
         public void Rewind(int deltaTime)
         {
         }
+
+        public static Fleet FromBoats(params Boat[] members)
+        {
+            var result = new Fleet();
+            foreach (var member in members)
+            {
+                result.Join(member);
+            }
+            return result;
+        }
     }
 }
