@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "ChristmasLearningProject.Runtime.View",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "ChristmasLearningProject.Runtime.Domain"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

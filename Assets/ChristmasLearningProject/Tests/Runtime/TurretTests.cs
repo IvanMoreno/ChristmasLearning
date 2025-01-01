@@ -1,11 +1,12 @@
 using System.Collections;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
-using UnityEngine;
 using UnityEngine.TestTools;
+using static ChristmasLearningProject.Runtime.Domain.Route;
 using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.Simulate;
 using static UnityEngine.Object;
+using static UnityEngine.Vector2;
 
 namespace ChristmasLearningProject.Tests.Runtime
 {
@@ -22,9 +23,9 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator WhenTurretKills_CristalBoat_GameOver()
         {
-            yield return FromLevelEditor().WithTurretAt(Vector2.one).Build();
+            yield return FromLevelEditor().WithTurretAt(one).Build();
 
-            yield return DeployCristalBoat(Vector2.one * 2, Vector2.one);
+            yield return DeployCristalBoat(Between(one * 2, one));
 
             Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
         }
@@ -32,10 +33,10 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator ShieldBoat_BlocksTurretAttack_WhenInFrontOfCristalBoat()
         {
-            yield return FromLevelEditor().WithShieldBoatEnabled().WithTurretAt(Vector2.one).Build();
+            yield return FromLevelEditor().WithShieldBoatEnabled().WithTurretAt(one).Build();
 
-            yield return DeployShieldBoat(Vector2.one * 2, Vector2.one);
-            yield return DeployCristalBoat(Vector2.one * 3, Vector2.one * 2);
+            yield return DeployShieldBoat(Between(one * 2, one));
+            yield return DeployCristalBoat(Between(one * 3, one * 2));
 
             Assert.IsNull(FindObjectOfType<GameOverScreen>());
         }
@@ -43,10 +44,10 @@ namespace ChristmasLearningProject.Tests.Runtime
         [UnityTest]
         public IEnumerator TurretShoots_NearestBoat()
         {
-            yield return FromLevelEditor().WithShieldBoatEnabled().WithTurretAt(Vector2.one).Build();
+            yield return FromLevelEditor().WithShieldBoatEnabled().WithTurretAt(one).Build();
 
-            yield return DeployShieldBoat(Vector2.one * 5, Vector2.one * 2);
-            yield return DeployCristalBoat(Vector2.one * 2, Vector2.one);
+            yield return DeployShieldBoat(Between(one * 5, one * 2));
+            yield return DeployCristalBoat(Between(one * 2, one));
 
             Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
         }
