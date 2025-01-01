@@ -12,7 +12,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         Route(Vector2 departure, Vector2 destination)
         {
             if (departure.Equals(destination))
-                throw new InvalidOperationException("A valid route must be specified first");
+                throw new InvalidOperationException("departure and destination must be different");
 
             Departure = departure;
             Destination = destination;
