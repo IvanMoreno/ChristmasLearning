@@ -1,6 +1,7 @@
 using ChristmasLearningProject.Runtime.Domain;
 using NUnit.Framework;
 using UnityEngine;
+using static ChristmasLearningProject.Runtime.Domain.Route;
 
 namespace ChristmasLearningProject.Tests.Editor
 {
@@ -9,8 +10,8 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void MoveAllBoatsOfFleet()
         {
-            var firstBoat = Boat.WithRoute(Route.Between(Vector2.zero, Vector2.one));
-            var secondBoat = Boat.WithRoute(Route.Between(Vector2.zero, Vector2.one));
+            var firstBoat = Boat.WithRoute(Between(Vector2.zero, Vector2.one));
+            var secondBoat = Boat.WithRoute(Between(Vector2.zero, Vector2.one));
             var sut = new Fleet();
             sut.Join(firstBoat);
             sut.Join(secondBoat);
