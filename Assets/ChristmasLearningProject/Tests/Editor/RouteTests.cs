@@ -10,6 +10,7 @@ namespace ChristmasLearningProject.Tests.Editor
         public void ReachDeparture()
         {
             Assert.IsTrue(new Route(Vector2.zero, Vector2.one).ReachedDepartureAt(Vector2.zero));
+            Assert.IsTrue(new Route(Vector2.zero, Vector2.one).ReachedDepartureAt(Vector2.zero * -1));
         }
     }
 }
