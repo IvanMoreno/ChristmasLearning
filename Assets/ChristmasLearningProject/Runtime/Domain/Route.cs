@@ -9,7 +9,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         public readonly Vector2 Destination;
         public Vector2 Direction => (Destination - Departure).normalized;
 
-        public Route(Vector2 departure, Vector2 destination)
+        Route(Vector2 departure, Vector2 destination)
         {
             if (departure.Equals(destination))
                 throw new InvalidOperationException("A valid route must be specified first");
@@ -28,5 +28,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         {
             return (position * Direction).IsLessThan(Departure * Direction) || position.Equals(Departure);
         }
+
+        public static Route Between(Vector2 departure, Vector2 destination) => new(departure, destination);
     }
 }

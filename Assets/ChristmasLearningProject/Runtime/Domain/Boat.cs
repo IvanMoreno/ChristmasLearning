@@ -29,7 +29,7 @@ namespace ChristmasLearningProject.Runtime.Domain
             if (departure.Equals(destination))
                 throw new ArgumentException("departure and destination must differ");
 
-            route = new Route(departure, destination);
+            route = Route.Between(departure, destination);
             Position = route.Departure;
         }
 
