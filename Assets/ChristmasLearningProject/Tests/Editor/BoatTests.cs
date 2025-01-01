@@ -5,22 +5,6 @@ using UnityEngine;
 
 namespace ChristmasLearningProject.Tests.Editor
 {
-    public class FleetTests
-    {
-        [Test]
-        public void MoveAllBoatsOfFleet()
-        {
-            var doc = new Boat();
-            doc.SetRoute(Vector2.zero, Vector2.one);
-            var sut = new Fleet();
-            sut.Join(doc);
-            
-            sut.Move(1);
-            
-            Assert.IsTrue(doc.Position.IsGreaterThan(Vector2.zero));
-        }
-    }
-    
     public class BoatTests
     {
         Boat sut;
@@ -34,7 +18,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void MoveBoatTowardsDestination()
         {
-            sut.SetRoute(Vector2.zero, Vector2.one);
+            sut.SetRoute(Route.Between(Vector2.zero, Vector2.one));
 
             sut.Move(1);
 
@@ -44,7 +28,8 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void MoveBoatTowardsNegativeDirection()
         {
-            sut.SetRoute(Vector2.zero, Vector2.one * -1);
+            Vector2 destination = Vector2.one * -1;
+            sut.SetRoute(Route.Between(Vector2.zero, destination));
 
             sut.Move(1);
 
@@ -54,7 +39,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void StopAfterReachingDestination()
         {
-            sut.SetRoute(Vector2.zero, Vector2.one);
+            sut.SetRoute(Route.Between(Vector2.zero, Vector2.one));
 
             sut.Move(10);
 
@@ -64,7 +49,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void MoveEvenly()
         {
-            sut.SetRoute(Vector2.zero, Vector2.one);
+            sut.SetRoute(Route.Between(Vector2.zero, Vector2.one));
 
             sut.Move(0.01f);
             var firstStepDistance = sut.Position;
@@ -77,7 +62,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void RewindMovement()
         {
-            sut.SetRoute(Vector2.zero, Vector2.one);
+            sut.SetRoute(Route.Between(Vector2.zero, Vector2.one));
 
             sut.Move(0.01f);
             sut.Rewind(0.01f);
@@ -88,7 +73,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void Position_IsNotClamped_DuringRewind()
         {
-            sut.SetRoute(Vector2.zero, Vector2.one);
+            sut.SetRoute(Route.Between(Vector2.zero, Vector2.one));
 
             sut.Rewind(1);
 
@@ -98,7 +83,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void PositionClamping_TakesIntoAccount_MovementDirection()
         {
-            sut.SetRoute(Vector2.one, Vector2.zero);
+            sut.SetRoute(Route.Between(Vector2.one, Vector2.zero));
 
             sut.Move(0.01f);
 
@@ -108,7 +93,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void ClampPosition_AfterReaching_Destination_InNegativeDirection()
         {
-            sut.SetRoute(Vector2.one, Vector2.zero);
+            sut.SetRoute(Route.Between(Vector2.one, Vector2.zero));
 
             sut.Move(10);
 

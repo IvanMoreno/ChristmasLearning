@@ -38,7 +38,7 @@ namespace ChristmasLearningProject.Runtime.View
                 if (deployCristalBoat)
                 {
                     var boat = Boat.Cristal();
-                    boat.SetRoute(departure, destination);
+                    boat.SetRoute(Route.Between(departure, destination));
                     var physicalBoat = Instantiate(cristalBoatPrefab, departure, Quaternion.identity);
                     physicalBoat.Configure(boat);
                     fleet.Join(boat);
@@ -47,7 +47,7 @@ namespace ChristmasLearningProject.Runtime.View
                 else
                 {
                     var boat = Boat.Shield();
-                    boat.SetRoute(departure, destination);
+                    boat.SetRoute(Route.Between(departure, destination));
                     var physicalBoat = Instantiate(shieldBoatPrefab, departure, Quaternion.identity);
                     physicalBoat.Configure(boat);
                     fleet.Join(boat);

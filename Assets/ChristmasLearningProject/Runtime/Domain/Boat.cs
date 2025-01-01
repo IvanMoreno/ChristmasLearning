@@ -24,12 +24,9 @@ namespace ChristmasLearningProject.Runtime.Domain
             Position = route.Destination;
         }
 
-        public void SetRoute(Vector2 departure, Vector2 destination)
+        public void SetRoute(Route route)
         {
-            if (departure.Equals(destination))
-                throw new ArgumentException("departure and destination must differ");
-
-            route = Route.Between(departure, destination);
+            this.route = route;
             Position = route.Departure;
         }
 
