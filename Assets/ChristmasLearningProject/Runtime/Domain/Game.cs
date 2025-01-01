@@ -26,6 +26,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         public void Rewind()
         {
             IsRewind = true;
+            IsPaused = false;
         }
     }
 }
