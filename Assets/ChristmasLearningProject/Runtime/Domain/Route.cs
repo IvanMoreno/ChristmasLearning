@@ -13,7 +13,7 @@ namespace ChristmasLearningProject.Runtime.Domain
         {
             if (departure.Equals(destination))
                 throw new InvalidOperationException("A valid route must be specified first");
-            
+
             Departure = departure;
             Destination = destination;
         }
@@ -24,9 +24,9 @@ namespace ChristmasLearningProject.Runtime.Domain
                    Departure.IsGreaterThan(Destination) && position.IsLessThan(Destination);
         }
 
-        public bool ReachedDepartureAt(Vector2 zero)
+        public bool ReachedDepartureAt(Vector2 position)
         {
-            return true;
+            return position.IsLessThan(Departure) || position.Equals(Departure);
         }
     }
 }
