@@ -15,5 +15,16 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsFalse(sut.IsPaused);
         }
+
+        [Test]
+        public void FastForwardDisablesRewind()
+        {
+            var sut = new Game();
+            
+            sut.Rewind();
+            sut.FastForward();
+            
+            Assert.IsFalse(sut.IsRewind);
+        }
     }
 }
