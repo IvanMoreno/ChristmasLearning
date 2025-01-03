@@ -1,10 +1,12 @@
 using System.Collections;
 using ChristmasLearningProject.Runtime.View;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.TestTools;
 using static ChristmasLearningProject.Runtime.Domain.Route;
 using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.Simulate;
+using static UnityEngine.Object;
 using static UnityEngine.Vector2;
 
 namespace ChristmasLearningProject.Tests.Runtime
@@ -59,6 +61,14 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return DeployCristalBoat(Between(one * 5, one * down * 5));
             
             Assert.False(Is.GameOver());
+        }
+
+        [UnityTest]
+        public IEnumerator FaceAway_FromTheIsland()
+        {
+            yield return FromLevelEditor().WithTurretAt(right).Build();
+            
+            Assert.IsTrue(Distance(right, FindObjectOfType<Turret>().transform.up) <= .05f);
         }
     }
 }

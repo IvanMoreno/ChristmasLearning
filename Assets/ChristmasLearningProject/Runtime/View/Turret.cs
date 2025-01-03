@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Runtime.View
 {
     public class Turret : MonoBehaviour
     {
+        void Start()
+        {
+            transform.up = transform.position - Vector3.zero;
+        }
+
         void Update()
         {
             ShootToEnemy();
