@@ -5,7 +5,6 @@ using UnityEngine.TestTools;
 using static ChristmasLearningProject.Runtime.Domain.Route;
 using static ChristmasLearningProject.Tests.Runtime.LevelBuilder;
 using static ChristmasLearningProject.Tests.Runtime.Simulate;
-using static UnityEngine.Object;
 using static UnityEngine.Vector2;
 
 namespace ChristmasLearningProject.Tests.Runtime
@@ -17,7 +16,7 @@ namespace ChristmasLearningProject.Tests.Runtime
         {
             yield return FromLevelEditor().Build();
             
-            Assert.IsNull(FindObjectOfType<GameOverScreen>());
+            Assert.False(Is.GameOver());
         }
 
         [UnityTest]
@@ -27,7 +26,7 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             yield return DeployCristalBoat(Between(one * 2, one));
 
-            Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
+            Assert.True(Is.GameOver());
         }
 
         [UnityTest]
@@ -38,7 +37,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return DeployShieldBoat(Between(one * 2, one));
             yield return DeployCristalBoat(Between(one * 3, one * 2));
 
-            Assert.IsNull(FindObjectOfType<GameOverScreen>());
+            Assert.False(Is.GameOver());
         }
 
         [UnityTest]
@@ -49,7 +48,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return DeployShieldBoat(Between(one * 5, one * 2));
             yield return DeployCristalBoat(Between(one * 2, one));
 
-            Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
+            Assert.True(Is.GameOver());
         }
 
         [UnityTest]
@@ -59,7 +58,7 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             yield return DeployCristalBoat(Between(one * 5, one * down * 5));
             
-            Assert.IsNull(FindObjectOfType<GameOverScreen>());
+            Assert.False(Is.GameOver());
         }
     }
 }
