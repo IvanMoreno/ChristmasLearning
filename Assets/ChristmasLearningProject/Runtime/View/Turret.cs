@@ -12,16 +12,19 @@ namespace ChristmasLearningProject.Runtime.View
         void ShootToEnemy()
         {
             if (FindObjectOfType<CristalBoat>() == null) return;
+            var distanceToCristalBoat = 
+                Vector2.Distance(transform.position, FindObjectOfType<CristalBoat>().transform.position);
+                
             if (FindObjectOfType<ShieldBoat>() != null)
             {
                 var distanceToShieldBoat =
                     Vector2.Distance(transform.position, FindObjectOfType<ShieldBoat>().transform.position);
-                var distanceToCristalBoat = 
-                    Vector2.Distance(transform.position, FindObjectOfType<CristalBoat>().transform.position);
 
                 if (distanceToShieldBoat <= distanceToCristalBoat)
                     return;
             }
+
+            if (distanceToCristalBoat >= 5) return;
             
             FindObjectOfType<CristalBoat>().gameObject.SetActive(false);
             FindObjectOfType<GameOverScreen>(true).gameObject.SetActive(true);

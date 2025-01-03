@@ -51,5 +51,15 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             Assert.IsNotNull(FindObjectOfType<GameOverScreen>());
         }
+
+        [UnityTest]
+        public IEnumerator Ignore_FarAwayBoats()
+        {
+            yield return FromLevelEditor().WithTurretAt(one).Build();
+
+            yield return DeployCristalBoat(Between(one * 5, one * down * 5));
+            
+            Assert.IsNull(FindObjectOfType<GameOverScreen>());
+        }
     }
 }
