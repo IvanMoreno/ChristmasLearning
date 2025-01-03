@@ -70,5 +70,15 @@ namespace ChristmasLearningProject.Tests.Runtime
             
             Assert.IsTrue(Distance(right, FindObjectOfType<Turret>().transform.up) <= .05f);
         }
+
+        [UnityTest]
+        public IEnumerator IgnoreBoats_OutsideOfVisionRange()
+        {
+            yield return FromLevelEditor().WithTurretAt(right).Build();
+
+            yield return DeployCristalBoat(Between(left, left * 2));
+            
+            Assert.False(Is.GameOver());
+        }
     }
 }

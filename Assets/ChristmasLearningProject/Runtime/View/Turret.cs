@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Runtime.View
@@ -31,6 +30,9 @@ namespace ChristmasLearningProject.Runtime.View
             }
 
             if (distanceToCristalBoat >= 5) return;
+            if (Vector2.Angle(transform.up,
+                    FindObjectOfType<CristalBoat>().transform.position - transform.position) > 120)
+                return;
             
             FindObjectOfType<CristalBoat>().gameObject.SetActive(false);
             FindObjectOfType<GameOverScreen>(true).gameObject.SetActive(true);
