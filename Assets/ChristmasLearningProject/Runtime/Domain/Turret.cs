@@ -8,7 +8,7 @@ namespace ChristmasLearningProject.Runtime.Domain
     {
         public const float MaxDetectionDistance = 5;
         public const float MaxVisionAngle = 120;
-        const float ReloadSeconds = 3;
+        public const float ReloadSeconds = 3;
 
         readonly Vector2 position;
         readonly Vector2 facingDirection;
