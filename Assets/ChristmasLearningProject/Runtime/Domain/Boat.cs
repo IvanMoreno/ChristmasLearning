@@ -6,6 +6,8 @@ namespace ChristmasLearningProject.Runtime.Domain
     {
         const int Speed = 10;
         public Vector2 Position { get; private set; }
+        public bool IsAlive { get; set; } = true;
+
         Route route;
 
         public void Rewind(float deltaTime) => Move(-deltaTime);

@@ -1,6 +1,5 @@
 using ChristmasLearningProject.Runtime.Domain;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Tests.Editor
@@ -98,6 +97,12 @@ namespace ChristmasLearningProject.Tests.Editor
             sut.Move(10);
 
             Assert.AreEqual(Vector2.zero, sut.Position);
+        }
+
+        [Test]
+        public void Boat_IsNotDead_ByDefault()
+        {
+            Assert.IsTrue(sut.IsAlive);
         }
     }
 }
