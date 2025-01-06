@@ -18,18 +18,7 @@ namespace ChristmasLearningProject.Runtime.Domain
             NearestInvader(invaders).ReceiveDamage();
         }
 
-        Boat NearestInvader(Fleet invaders)
-        {
-            var nearestInvader = invaders.Members.First();
-            foreach (var invader in invaders.Members)
-            {
-                if (Distance(invader.Position, position) >= Distance(nearestInvader.Position, position))
-                    continue;
-                
-                nearestInvader = invader;
-            }
-
-            return nearestInvader;
-        }
+        Boat NearestInvader(Fleet invaders) => invaders.Members.OrderBy(DistanceToMe).First();
+        float DistanceToMe(Boat invader) => Distance(invader.Position, position);
     }
 }
