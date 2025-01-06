@@ -114,5 +114,15 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsFalse(sut.IsAlive);
         }
+        
+        [Test]
+        public void Survive_WithMoreLives()
+        {
+            var sut = Boat.Cristal().WithLives(2);
+
+            sut.ReceiveDamage();
+            
+            Assert.IsTrue(sut.IsAlive);
+        }
     }
 }
