@@ -27,6 +27,7 @@ namespace ChristmasLearningProject.Tests.Runtime
             yield return FromLevelEditor().WithTurretAt(one).Build();
 
             yield return DeployCristalBoat(Between(one * 2, one));
+            yield return null;
 
             Assert.True(Is.GameOver());
         }
@@ -49,6 +50,7 @@ namespace ChristmasLearningProject.Tests.Runtime
 
             yield return DeployShieldBoat(Between(one * 5, one * 2));
             yield return DeployCristalBoat(Between(one * 2, one));
+            yield return null;
 
             Assert.True(Is.GameOver());
         }

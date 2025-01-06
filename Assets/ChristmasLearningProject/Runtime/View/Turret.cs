@@ -1,41 +1,24 @@
+using ChristmasLearningProject.Runtime.Domain;
 using UnityEngine;
+using Zenject;
 
 namespace ChristmasLearningProject.Runtime.View
 {
     public class Turret : MonoBehaviour
     {
+        [Inject] Fleet fleet;
+        
+        Domain.Turret turret;
+        
         void Start()
         {
             transform.up = transform.position - Vector3.zero;
+            turret = Domain.Turret.Ensemble(transform.position, transform.up);
         }
 
         void Update()
         {
-            ShootToEnemy();
-        }
-
-        void ShootToEnemy()
-        {
-            if (FindObjectOfType<CristalBoat>() == null) return;
-            var distanceToCristalBoat = 
-                Vector2.Distance(transform.position, FindObjectOfType<CristalBoat>().transform.position);
-                
-            if (FindObjectOfType<ShieldBoat>() != null)
-            {
-                var distanceToShieldBoat =
-                    Vector2.Distance(transform.position, FindObjectOfType<ShieldBoat>().transform.position);
-
-                if (distanceToShieldBoat <= distanceToCristalBoat)
-                    return;
-            }
-
-            if (distanceToCristalBoat >= 5) return;
-            if (Vector2.Angle(transform.up,
-                    FindObjectOfType<CristalBoat>().transform.position - transform.position) > 120)
-                return;
-            
-            FindObjectOfType<CristalBoat>().gameObject.SetActive(false);
-            FindObjectOfType<GameOverScreen>(true).gameObject.SetActive(true);
+            turret.Attack(fleet, Time.deltaTime);
         }
     }
 }
