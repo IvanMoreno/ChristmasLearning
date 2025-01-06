@@ -76,5 +76,17 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsFalse(doc.IsAlive);
         }
+
+        [Test]
+        public void OnlyReload_AfterAttack()
+        {
+            var sut = Turret.Ensemble(zero, up);
+            var doc = Boat.WithRoute(Between(up, zero)).WithLives(1);
+            
+            sut.Attack(Fleet.Empty(), deltaTime: 1f);
+            sut.Attack(Fleet.FromBoats(doc), deltaTime: 1f);
+            
+            Assert.IsFalse(doc.IsAlive);
+        }
     }
 }

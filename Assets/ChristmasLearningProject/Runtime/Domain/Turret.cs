@@ -28,9 +28,12 @@ namespace ChristmasLearningProject.Runtime.Domain
             
             passedSeconds += deltaTime;
             if (passedSeconds < ReloadSeconds) return;
-            passedSeconds = 0;
             
-            NearestInvader(invaders)?.ReceiveDamage();
+            var nearestInvader = NearestInvader(invaders);
+            if (nearestInvader == null) return;
+            
+            nearestInvader.ReceiveDamage();
+            passedSeconds = 0;
         }
 
         Boat NearestInvader(Fleet invaders) => invaders.Members.OrderBy(DistanceToMe).FirstOrDefault(IsInRange);
