@@ -41,5 +41,16 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsTrue(doc.IsAlive);
         }
+
+        [Test]
+        public void IgnoreInvader_OutsideOfVisionAngle()
+        {
+            var sut = Turret.Ensemble(zero, up);
+            var doc = Boat.WithRoute(Between(down, zero)).WithLives(1);
+            
+            sut.Attack(Fleet.FromBoats(doc));
+            
+            Assert.IsTrue(doc.IsAlive);
+        }
     }
 }
