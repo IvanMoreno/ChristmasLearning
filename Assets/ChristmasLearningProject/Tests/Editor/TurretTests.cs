@@ -17,5 +17,18 @@ namespace ChristmasLearningProject.Tests.Editor
             
             Assert.IsFalse(doc.IsAlive);
         }
+
+        [Test]
+        public void Attack_OnlyNearestBoat()
+        {
+            var sut = new Turret(zero, up);
+            var nearestBoat = Boat.WithRoute(Between(up, zero)).WithLives(1);
+            var furthestBoat = Boat.WithRoute(Between(up * 2, zero)).WithLives(1);
+            
+            sut.Attack(Fleet.FromBoats(nearestBoat, furthestBoat));
+            
+            Assert.IsFalse(nearestBoat.IsAlive);
+            Assert.IsTrue(furthestBoat.IsAlive);
+        }
     }
 }
