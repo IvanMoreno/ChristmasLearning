@@ -15,15 +15,21 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public void Attack(Fleet invaders)
         {
+            NearestInvader(invaders).ReceiveDamage();
+        }
+
+        Boat NearestInvader(Fleet invaders)
+        {
             var nearestInvader = invaders.Members.First();
             foreach (var invader in invaders.Members)
             {
                 if (Distance(invader.Position, position) >= Distance(nearestInvader.Position, position))
                     continue;
+                
                 nearestInvader = invader;
             }
-            
-            nearestInvader.ReceiveDamage();
+
+            return nearestInvader;
         }
     }
 }
