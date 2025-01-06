@@ -8,7 +8,7 @@ namespace ChristmasLearningProject.Tests.Editor
     public class TurretTests
     {
         [Test]
-        public void KillBoatInRange()
+        public void KillInvaderInRange()
         {
             var sut = Turret.Ensemble(zero, up);
             var doc = Boat.WithRoute(Between(up, zero)).WithLives(1);
@@ -19,7 +19,7 @@ namespace ChristmasLearningProject.Tests.Editor
         }
 
         [Test]
-        public void Attack_OnlyNearestBoat()
+        public void Attack_OnlyNearestInvader()
         {
             var sut = Turret.Ensemble(zero, up);
             var nearestBoat = Boat.WithRoute(Between(up, zero)).WithLives(1);
@@ -32,7 +32,7 @@ namespace ChristmasLearningProject.Tests.Editor
         }
 
         [Test]
-        public void IgnoreBoat_OutsideOfRange()
+        public void IgnoreFarAwayInvader()
         {
             var sut = Turret.Ensemble(zero, up);
             var doc = Boat.WithRoute(Between(up * Turret.MaxDetectionDistance * 2, zero)).WithLives(1);
