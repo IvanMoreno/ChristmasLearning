@@ -37,11 +37,21 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public static Boat Shield() => new();
 
+        public Boat WithLives(int howMuch)
+        {
+            return this;
+        }
+
         public static Boat WithRoute(Route route)
         {
             var result = new Boat();
             result.SetRoute(route);
             return result;
+        }
+
+        public void ReceiveDamage()
+        {
+            IsAlive = false;
         }
     }
 }

@@ -102,7 +102,17 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void Boat_IsNotDead_ByDefault()
         {
-            Assert.IsTrue(sut.IsAlive);
+            Assert.IsTrue(Boat.Cristal().IsAlive);
+        }
+
+        [Test]
+        public void KillBoat_AfterReceivingDamage()
+        {
+            var sut = Boat.Cristal().WithLives(1);
+
+            sut.ReceiveDamage();
+            
+            Assert.IsFalse(sut.IsAlive);
         }
     }
 }
