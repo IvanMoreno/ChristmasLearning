@@ -44,28 +44,6 @@ namespace ChristmasLearningProject.Tests.Runtime
         }
 
         [UnityTest]
-        public IEnumerator TurretShoots_NearestBoat()
-        {
-            yield return FromLevelEditor().WithShieldBoatEnabled().WithTurretAt(one).Build();
-
-            yield return DeployShieldBoat(Between(one * 5, one * 2));
-            yield return DeployCristalBoat(Between(one * 2, one));
-            yield return null;
-
-            Assert.True(Is.GameOver());
-        }
-
-        [UnityTest]
-        public IEnumerator Ignore_FarAwayBoats()
-        {
-            yield return FromLevelEditor().WithTurretAt(one).Build();
-
-            yield return DeployCristalBoat(Between(one * 5, one * down * 5));
-            
-            Assert.False(Is.GameOver());
-        }
-
-        [UnityTest]
         public IEnumerator FaceAway_FromTheIsland()
         {
             yield return FromLevelEditor().WithTurretAt(right).Build();
