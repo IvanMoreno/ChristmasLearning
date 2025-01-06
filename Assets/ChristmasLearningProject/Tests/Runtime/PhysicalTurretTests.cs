@@ -11,7 +11,7 @@ using static UnityEngine.Vector2;
 
 namespace ChristmasLearningProject.Tests.Runtime
 {
-    public class TurretTests
+    public class PhysicalTurretTests
     {
         [UnityTest]
         public IEnumerator Hide_GameOverScreen_OnStart()
