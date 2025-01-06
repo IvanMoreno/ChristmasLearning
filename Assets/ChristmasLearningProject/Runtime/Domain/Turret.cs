@@ -36,7 +36,8 @@ namespace ChristmasLearningProject.Runtime.Domain
             passedSeconds = 0;
         }
 
-        Boat NearestInvader(Fleet invaders) => invaders.Members.OrderBy(DistanceToMe).FirstOrDefault(IsInRange);
+        Boat NearestInvader(Fleet invaders) => invaders.Members.Where(IsAlive).OrderBy(DistanceToMe).FirstOrDefault(IsInRange);
+        static bool IsAlive(Boat invader) => invader.IsAlive;
         float DistanceToMe(Boat invader) => Distance(invader.Position, position);
         bool IsInRange(Boat invader) => IsNearEnough(invader) && IsInsideVisionRange(invader);
         bool IsNearEnough(Boat invader) => Distance(invader.Position, position) <= MaxDetectionDistance;
