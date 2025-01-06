@@ -21,7 +21,7 @@ namespace ChristmasLearningProject.Runtime.Domain
             this.facingDirection = facingDirection;
         }
 
-        public void Attack(Fleet invaders, float deltaTime = 1f)
+        public void Attack(Fleet invaders, float deltaTime)
         {
             if (deltaTime < 0)
                 throw new ArgumentException("deltaTime must be positive");

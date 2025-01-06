@@ -13,7 +13,7 @@ namespace ChristmasLearningProject.Tests.Editor
             var sut = Turret.Ensemble(zero, up);
             var doc = Boat.WithRoute(Between(up, zero)).WithLives(1);
             
-            sut.Attack(Fleet.FromBoats(doc));
+            sut.Attack(Fleet.FromBoats(doc), deltaTime: 1f);
             
             Assert.IsFalse(doc.IsAlive);
         }
@@ -25,7 +25,7 @@ namespace ChristmasLearningProject.Tests.Editor
             var nearestBoat = Boat.WithRoute(Between(up, zero)).WithLives(1);
             var furthestBoat = Boat.WithRoute(Between(up * 2, zero)).WithLives(1);
             
-            sut.Attack(Fleet.FromBoats(nearestBoat, furthestBoat));
+            sut.Attack(Fleet.FromBoats(nearestBoat, furthestBoat), deltaTime: 1f);
             
             Assert.IsFalse(nearestBoat.IsAlive);
             Assert.IsTrue(furthestBoat.IsAlive);
@@ -37,7 +37,7 @@ namespace ChristmasLearningProject.Tests.Editor
             var sut = Turret.Ensemble(zero, up);
             var doc = Boat.WithRoute(Between(up * Turret.MaxDetectionDistance * 2, zero)).WithLives(1);
             
-            sut.Attack(Fleet.FromBoats(doc));
+            sut.Attack(Fleet.FromBoats(doc), deltaTime: 1f);
             
             Assert.IsTrue(doc.IsAlive);
         }
@@ -48,7 +48,7 @@ namespace ChristmasLearningProject.Tests.Editor
             var sut = Turret.Ensemble(zero, up);
             var doc = Boat.WithRoute(Between(down, zero)).WithLives(1);
             
-            sut.Attack(Fleet.FromBoats(doc));
+            sut.Attack(Fleet.FromBoats(doc), deltaTime: 1f);
             
             Assert.IsTrue(doc.IsAlive);
         }
