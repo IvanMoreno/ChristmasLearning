@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using static UnityEngine.Vector2;
@@ -22,6 +23,9 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public void Attack(Fleet invaders, float deltaTime = 1f)
         {
+            if (deltaTime < 0)
+                throw new ArgumentException("deltaTime must be positive");
+            
             passedSeconds += deltaTime;
             if (passedSeconds < ReloadSeconds) return;
             passedSeconds = 0;
