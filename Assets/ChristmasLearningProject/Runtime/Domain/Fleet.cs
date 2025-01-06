@@ -6,7 +6,7 @@ namespace ChristmasLearningProject.Runtime.Domain
     public class Fleet
     {
         readonly IList<Boat> members = new List<Boat>();
-        
+        public IList<Boat> Members => members;
         public void Join(Boat member) => members.Add(member);
 
         public void Move(float deltaTime)
