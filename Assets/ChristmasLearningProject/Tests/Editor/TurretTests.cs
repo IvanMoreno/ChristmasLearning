@@ -10,7 +10,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void KillBoatInRange()
         {
-            var sut = new Turret(zero, up);
+            var sut = Turret.Ensemble(zero, up);
             var doc = Boat.WithRoute(Between(up, zero)).WithLives(1);
             
             sut.Attack(Fleet.FromBoats(doc));
@@ -21,7 +21,7 @@ namespace ChristmasLearningProject.Tests.Editor
         [Test]
         public void Attack_OnlyNearestBoat()
         {
-            var sut = new Turret(zero, up);
+            var sut = Turret.Ensemble(zero, up);
             var nearestBoat = Boat.WithRoute(Between(up, zero)).WithLives(1);
             var furthestBoat = Boat.WithRoute(Between(up * 2, zero)).WithLives(1);
             

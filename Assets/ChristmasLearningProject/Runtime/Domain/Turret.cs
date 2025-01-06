@@ -8,7 +8,7 @@ namespace ChristmasLearningProject.Runtime.Domain
     {
         readonly Vector2 position;
 
-        public Turret(Vector2 position, Vector2 facingDirection)
+        Turret(Vector2 position, Vector2 facingDirection)
         {
             this.position = position;
         }
@@ -19,6 +19,9 @@ namespace ChristmasLearningProject.Runtime.Domain
         }
 
         Boat NearestInvader(Fleet invaders) => invaders.Members.OrderBy(DistanceToMe).First();
+
         float DistanceToMe(Boat invader) => Distance(invader.Position, position);
+
+        public static Turret Ensemble(Vector2 position, Vector2 facingDirection) => new(position, facingDirection);
     }
 }
