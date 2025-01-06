@@ -30,5 +30,16 @@ namespace ChristmasLearningProject.Tests.Editor
             Assert.IsFalse(nearestBoat.IsAlive);
             Assert.IsTrue(furthestBoat.IsAlive);
         }
+
+        [Test]
+        public void IgnoreBoat_OutsideOfRange()
+        {
+            var sut = Turret.Ensemble(zero, up);
+            var doc = Boat.WithRoute(Between(up * Turret.MaxDetectionDistance * 2, zero)).WithLives(1);
+            
+            sut.Attack(Fleet.FromBoats(doc));
+            
+            Assert.IsTrue(doc.IsAlive);
+        }
     }
 }
