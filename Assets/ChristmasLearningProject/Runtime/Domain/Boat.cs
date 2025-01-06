@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ChristmasLearningProject.Runtime.Domain
@@ -41,6 +42,9 @@ namespace ChristmasLearningProject.Runtime.Domain
 
         public Boat WithLives(int howMuch)
         {
+            if (howMuch <= 0)
+                throw new ArgumentException("Lives must be greater than 0");
+            
             lives = howMuch;
             return this;
         }
