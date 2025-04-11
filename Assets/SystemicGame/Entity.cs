@@ -1,4 +1,6 @@
-public interface Entity
+using UnityEngine;
+
+public abstract class Entity : MonoBehaviour
 {
-    void Perceive(string stimuli);
+    public abstract void Perceive(string stimuli);
 }
