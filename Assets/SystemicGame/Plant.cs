@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class Plant : Entity
+public class Plant : MonoBehaviour
 {
     public Material burnedMaterial;
-    protected override string signal { get; }
 
-    public override void Perceive(string stimuli)
+    public void Perceive(string stimuli)
     {
-        if (stimuli != "Fire") return;
+        var reactiveTo = "Fire";
+        if (stimuli != reactiveTo) return;
         
         GetComponent<MeshRenderer>().material = burnedMaterial;
 
-        if (gameObject.GetComponent<Flame>() == null)
+        if (gameObject.GetComponent<Emitter>() == null)
         {
-            gameObject.AddComponent<Flame>();
+            gameObject.AddComponent<Emitter>().signal = reactiveTo;
         }
     }
 }
