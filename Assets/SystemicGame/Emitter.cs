@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Emitter : MonoBehaviour
@@ -24,9 +25,17 @@ public class Emitter : MonoBehaviour
         {
             nearbyEntity.SendMessage("Perceive", signal);
         }
-        catch
+        catch (Exception e)
         {
             
+        }
+    }
+
+    public void Perceive(string stimuli)
+    {
+        if (signal == "Fire" && stimuli == "Water")
+        {
+            Destroy(this);
         }
     }
 }
