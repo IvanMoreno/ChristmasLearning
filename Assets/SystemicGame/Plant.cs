@@ -3,6 +3,8 @@ using UnityEngine;
 public class Plant : Entity
 {
     public Material burnedMaterial;
+    protected override string signal { get; }
+
     public override void Perceive(string stimuli)
     {
         if (stimuli != "Fire") return;
@@ -12,13 +14,6 @@ public class Plant : Entity
         if (gameObject.GetComponent<Flame>() == null)
         {
             gameObject.AddComponent<Flame>();
-            var nearby = Physics.OverlapSphere(transform.position, 1);
-            foreach (var nearbyEntity in nearby)
-            {
-                if (!nearbyEntity.TryGetComponent(typeof(Entity), out var entity)) return;
-
-                entity.SendMessage("Perceive", "Fire");
-            }
         }
     }
 }
