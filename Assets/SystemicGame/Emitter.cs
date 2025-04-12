@@ -31,7 +31,7 @@ public class Emitter : MonoBehaviour
         }
     }
 
-    public void Perceive(string stimuli)
+    void Perceive(string stimuli)
     {
         if (signal == "Fire" && stimuli == "Water")
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Flame : MonoBehaviour
+public class Wetable : MonoBehaviour
 {
     public Material dfasfasfs;
 

@@ -6,7 +6,7 @@ public class Plant : MonoBehaviour
     public Material burnedMaterial;
     public Material plantMaterial;
 
-    public void Perceive(string stimuli)
+    void Perceive(string stimuli)
     {
         var reactiveTo = "Fire";
         if (stimuli != reactiveTo) return;
