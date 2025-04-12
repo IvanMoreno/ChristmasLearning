@@ -6,8 +6,12 @@ public class Wire : MonoBehaviour
     {
         if (stimuli == "Electricity")
         {
-            gameObject.AddComponent<Emitter>().signal = "Electricity";
-            Destroy(gameObject.GetComponent<Emitter>(), 0.1f);
+            if (gameObject.GetComponent<Emitter>() != null)
+                return;
+            
+            var newComponent = gameObject.AddComponent<Emitter>();
+            newComponent.signal = "Electricity";
+            Destroy(newComponent, 0.1f);
         }
     }
 
@@ -15,11 +19,11 @@ public class Wire : MonoBehaviour
     {
         if (gameObject.GetComponent<Emitter>() != null)
         {
-            GetComponent<SpriteRenderer>().color = Color.yellow;
+            GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.gray;
+            GetComponentInChildren<SpriteRenderer>().color = Color.gray;
         }
     }
 }

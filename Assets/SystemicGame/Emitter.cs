@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 using UnityEngine;
 
 public class Emitter : MonoBehaviour
@@ -8,7 +7,7 @@ public class Emitter : MonoBehaviour
 
     void Start()
     {
-        var nearby = Physics.OverlapSphere(transform.position, 1);
+        var nearby = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x);
         foreach (var nearbyEntity in nearby)
         {
             EmitTo(nearbyEntity.gameObject);

@@ -8,8 +8,9 @@ public class HydraulicMill : MonoBehaviour
     {
         if (stimuli == "Water")
         {
-            if (gameObject.GetComponent<Emitter>() == null)
-                gameObject.AddComponent<Emitter>().signal = "Electricity";
+            var newComponent = gameObject.AddComponent<Emitter>();
+            newComponent.signal = "Electricity";
+            Destroy(newComponent, 0.1f);
         }
     }
     
