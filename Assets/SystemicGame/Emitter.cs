@@ -1,25 +1,26 @@
 using System;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class Emitter : MonoBehaviour
 {
     public string signal = "";
-    
+
     void Start()
     {
         var nearby = Physics.OverlapSphere(transform.position, 1);
         foreach (var nearbyEntity in nearby)
         {
-            EmitTo(nearbyEntity);
+            EmitTo(nearbyEntity.gameObject);
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        EmitTo(other);
+        EmitTo(other.gameObject);
     }
 
-    void EmitTo(Collider nearbyEntity)
+    void EmitTo(GameObject nearbyEntity)
     {
         try
         {
@@ -27,7 +28,6 @@ public class Emitter : MonoBehaviour
         }
         catch (Exception e)
         {
-            
         }
     }
 
