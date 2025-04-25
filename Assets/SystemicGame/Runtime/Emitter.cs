@@ -4,10 +4,12 @@ using UnityEngine;
 public class Emitter : MonoBehaviour
 {
     public string signal = "";
+    public float emissionArea = 0;
 
     void Start()
     {
-        var nearby = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x);
+        emissionArea = emissionArea == 0 ? transform.localScale.x : emissionArea;
+        var nearby = Physics2D.OverlapCircleAll(transform.position, emissionArea);
         foreach (var nearbyEntity in nearby)
         {
             EmitTo(nearbyEntity.gameObject);
@@ -21,13 +23,7 @@ public class Emitter : MonoBehaviour
 
     void EmitTo(GameObject nearbyEntity)
     {
-        try
-        {
-            nearbyEntity.SendMessage("Perceive", signal);
-        }
-        catch (Exception e)
-        {
-        }
+        nearbyEntity.SendMessage("Perceive", signal, SendMessageOptions.DontRequireReceiver);
     }
 
     void Perceive(string stimuli)
