@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         UNITY_PATH="C:/Program Files/Unity/Hub/Editor/2022.3.4f1/Editor/Unity.exe"
-        workingDir="/Users/MSI/.jenkins/workspace"
+        workingDir="C:/Users/MSI/.jenkins/workspace"
     }
     
     stages {
