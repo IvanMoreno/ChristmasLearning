@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Run Tests') {
             steps {
-                sh """cd ${workingDir};\
+                bat """cd ${workingDir};\
                     ${UNITY_PATH} -batchmode -projectPath ${workingDir} -runTests -testResults ${workingDir}/CI/results.xml -testPlatform PlayMode -nographics -quit;\
                   """
             }
