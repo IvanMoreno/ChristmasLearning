@@ -18,6 +18,24 @@ pipeline {
             }
         }
         
+        stage('Force Unity Library Regeneration') {
+            steps {
+                bat """
+                    echo "Forcing Unity to regenerate project files..."
+                    cd "${WORKSPACE}\\${branch}"
+                    
+                    rem Delete existing Library folder if it exists
+                    if exist "Library" rmdir /S /Q "Library"
+                    
+                    rem Force Unity to reimport everything
+                    "${UNITY_PATH}" -batchmode -quit -projectPath "${WORKSPACE}\\${branch}" -importPackages -logFile "${WORKSPACE}\\${branch}\\reimport.log"
+                    
+                    echo "Reimport log:"
+                    if exist "${WORKSPACE}\\${branch}\\reimport.log" type "${WORKSPACE}\\${branch}\\reimport.log"
+                """
+            }
+        }
+        
         stage('Run Tests') {
             steps {
                 bat """
