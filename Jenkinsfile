@@ -4,7 +4,7 @@ pipeline {
     environment {
         UNITY_PATH = "C:\\Program Files\\Unity\\Hub\\Editor\\2022.3.4f1\\Editor\\Unity.exe"
         repo = "https://github.com/IvanMoreno/ChristmasLearning.git"
-        branch = "master"  // Set your branch name
+        branch = "master"
         workingDir = "${WORKSPACE}"
     }
     
